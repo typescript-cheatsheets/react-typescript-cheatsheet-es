@@ -32,8 +32,4 @@ El repositorio original se puede encontrar [aquí](https://github.com/typescript
 
 **¿Quieres contribuir ayudando a traducir estos recursos?**
 
-**¡Increíble!** Primero, revise este _[Issue](https://github.com/typescript-cheatsheets/react-typescript-cheatsheet-es/issues/2)_ que describe el progreso y lea la [Guía de Estilo](https://github.com/typescript-cheatsheets/react-typescript-cheatsheet-es/blob/master/GUIA.md) para traducir.
-
----
-
-</div>
+**¡Increíble!** Primero, revise este _[issue](https://github.com/typescript-cheatsheets/react-typescript-cheatsheet-es/issues/2)_ que describe el progreso y lea la [Guía de Estilo](https://github.com/typescript-cheatsheets/react-typescript-cheatsheet-es/blob/master/GUIA.md) para traducir.
