@@ -22,20 +22,17 @@
 [¡Contribuir!](https://github.com/typescript-cheatsheets/react-typescript-cheatsheet/blob/master/CONTRIBUTING.md) |
 [¡Preguntas!](https://github.com/typescript-cheatsheets/react-typescript-cheatsheet-es/issues/new)
 
-
 ---
 
-:wave: Este repositorio es mantenido por [@laurosilvacom](https://twitter.com/laurosilvacom). ¡Estoy tan feliz de que quieras probar TypeScript con React! Si ve que algo anda mal o falta, ¡presente un [*Issue*](https://github.com/typescript-cheatsheets/react-typescript-cheatsheet-es/issues/new)! :+1:
+:wave: Este repositorio es mantenido por [@laurosilvacom](https://twitter.com/laurosilvacom). ¡Estoy tan feliz de que quieras probar TypeScript con React! Si ve que algo anda mal o falta, ¡presente un [_Issue_](https://github.com/typescript-cheatsheets/react-typescript-cheatsheet-es/issues/new)! :+1:
 
 El repositorio original se puede encontrar [aquí](https://github.com/typescript-cheatsheets/react-typescript-cheatsheet) (inglés).
-
 
 ---
 
 **¿Quieres contribuir ayudando a traducir estos recursos?**
 
-**¡Increíble!** Primero, revise este *[Issue](https://github.com/typescript-cheatsheets/react-typescript-cheatsheet-es/issues/2)* que describe el progreso y lea la [Guía de Estilo](https://github.com/typescript-cheatsheets/react-typescript-cheatsheet-es/blob/master/GUIA.md) para traducir.
-
+**¡Increíble!** Primero, revise este _[Issue](https://github.com/typescript-cheatsheets/react-typescript-cheatsheet-es/issues/2)_ que describe el progreso y lea la [Guía de Estilo](https://github.com/typescript-cheatsheets/react-typescript-cheatsheet-es/blob/master/GUIA.md) para traducir.
 
 ---
 
