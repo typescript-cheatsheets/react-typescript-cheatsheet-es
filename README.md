@@ -30,12 +30,10 @@
 
 El repositorio original se puede encontrar [aquí](https://github.com/typescript-cheatsheets/react-typescript-cheatsheet) (inglés).
 
-
 ---
 
 **¿Quieres contribuir ayudando a traducir estos recursos?**
 
-**¡Increíble!** Primero, revise este *[Issue]()* que describe el progreso y lea la [Guía de Estilo]() para traducir.
-
+**¡Increíble!** Primero, revise este _[Issue]()_ que describe el progreso y lea la [Guía de Estilo]() para traducir.
 
 ---
