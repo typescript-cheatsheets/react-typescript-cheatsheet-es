@@ -106,4 +106,5 @@ Aquí hay algunas sugerencias para la traducción de términos de uso común en 
 | template literals      | _template literals_                   |
 | uncontrolled component | componente no controlado              |
 
-Si desea agregar algo que falta, abra un [Issue](https://github.com/typescript-cheatsheets/react-typescript-cheatsheet-es/issues/new).
+
+Si desea agregar algo que falta, abra un [issue](https://github.com/typescript-cheatsheets/react-typescript-cheatsheet-es/issues/new).
