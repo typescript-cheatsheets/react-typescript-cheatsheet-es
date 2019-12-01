@@ -2,7 +2,7 @@
 
 **IMPORTANTE:**
 
-Si desea contribuir un ejemplo a la [Cheatsheet Original](https://github.com/typescript-cheatsheets/react-typescript-cheatsheet), abre un *Issue* en el repositorio original que está en inglés. De ahi se puede agregar al repositorio traducido en español.
+Si desea contribuir un ejemplo a la [Cheatsheet Original](https://github.com/typescript-cheatsheets/react-typescript-cheatsheet), abre un _Issue_ en el repositorio original que está en inglés. De ahi se puede agregar al repositorio traducido en español.
 
 ---
 
