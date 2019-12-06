@@ -85,6 +85,7 @@ Aquí hay algunas sugerencias para la traducción de términos de uso común en 
 | callback               | _callback_                            |
 | camelCase              | _camelCase_                           |
 | controlled component   | componente controlado                 |
+| Children               | _Children_                            |
 | Cheatsheet             | _Cheatsheet_                          |
 | debugging              | depuración                            |
 | DOM                    | DOM                                   |
@@ -96,6 +97,7 @@ Aquí hay algunas sugerencias para la traducción de términos de uso común en 
 | library                | biblioteca                            |
 | lowercase              | minúscula(s)                          |
 | props                  | _props_                               |
+| props drilling         | _props drilling_                      |
 | React element          | Elemento de React                     |
 | Type                   | _tipo_                                |
 | Types                  | _tipos_                               |
