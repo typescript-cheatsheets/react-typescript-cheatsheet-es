@@ -24,11 +24,11 @@
 
 ---
 
-:wave: Este repositorio es mantenido por [@laurosilvacom](https://twitter.com/laurosilvacom). ¡Estoy tan feliz de que quieras probar TypeScript con React! Si ve que algo anda mal o falta, ¡presente un [_Issue_](https://github.com/typescript-cheatsheets/react-typescript-cheatsheet-es/issues/new)! :+1:
-
-El repositorio original se puede encontrar [aquí](https://github.com/typescript-cheatsheets/react-typescript-cheatsheet) (inglés).
+:wave: Este repositorio es mantenido por [@laurosilvacom](https://twitter.com/laurosilvacom). ¡Estoy tan feliz de que quieras probar TypeScript con React! Si ves que algo esta mal, ¡abre un [_Issue_](https://github.com/typescript-cheatsheets/react-typescript-cheatsheet-es/issues/new)! :+1: El repositorio original se puede encontrar [aquí](https://github.com/typescript-cheatsheets/react-typescript-cheatsheet) (inglés).
 
 ---
+
+</div>
 
 **¿Quieres contribuir ayudando a traducir estos recursos?**
 
