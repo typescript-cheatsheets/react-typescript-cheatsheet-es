@@ -95,12 +95,14 @@ Aquí hay algunas sugerencias para la traducción de términos de uso común en 
 | key                    | _key_                                 |
 | lazy initialization    | inicialización diferida               |
 | library                | biblioteca                            |
+| linting                | _linting_                             |
 | lowercase              | minúscula(s)                          |
 | props                  | _props_                               |
 | props drilling         | _props drilling_                      |
 | React element          | Elemento de React                     |
 | Type                   | _tipo_                                |
 | Types                  | _tipos_                               |
+| Namespaced             | _Namespaced_                          |
 | render                 | renderizar (verb), renderizado (noun) |
 | shallow rendering      | renderizado superficial               |
 | state                  | estado                                |

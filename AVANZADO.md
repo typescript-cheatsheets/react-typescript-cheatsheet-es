@@ -70,6 +70,17 @@ La mejor herramienta para crear bibliotecas React + TS en este momento es [`tsdx
   - [TypeScript 3.2](#typescript-32)
   - [TypeScript 3.3](#typescript-33)
   - [TypeScript 3.4](#typescript-34)
+- [Sección 3: Misceláneas](#sección-3-Misceláneas)
+
+  - [Escribir bibliotecas de TypeScript en lugar de aplicaciones](#escribir-bibliotecas-de-typeScript-en-lugar-de-aplicaciones)
+  - [Componentes Comentados](#componentes-comentados)
+  - [Componentes Namespaced](#componentes-namespaced)
+  - [Desarrollo de Sistemas de Diseño](#desarrollo-de-sistemas-de-diseño)
+  - [Migrando desde Flow](#migrando-desde-flow)
+  - [Prettier](#prettier)
+  - [Linting](#linting)
+  - [Trabajar con bibliotecas que no son de TypeScript (escribe tu propio index.d.ts)](#trabajar-con-bibliotecas-que-no-son-de-typeScript-escribe-tu-propio-indexdts)
+  - [Sección 4: @types/react y @types/react-dom APIs](#sección-4-typesreact-y-typesreact-dom-apis)
 
 </details>
 
@@ -180,7 +191,7 @@ function PassThrough(props: { as: React.ElementType<any> }) {
 
 ## Componentes genéricos
 
-Del mismo modo que puede crear funciones y clases genéricas en TypeScript, también puede crear componentes genéricos para aprovechar el sistema de tipos para la seguridad de _tipos_ reutilizables. Tanto Props como State pueden aprovechar los mismos _tipos_ genéricos, aunque probablemente tenga más sentido para Props que para State. Luego puede usar el tipo genérico para anotar los _tipos_ de cualquier variable definida dentro del alcance de su función / clase.
+Del mismo modo que puede crear funciones y clases genéricas en TypeScript, también puede crear componentes genéricos para aprovechar el sistema de tipos para la seguridad de _tipos_ reutilizables. Tanto Props como State pueden aprovechar los mismos _tipos_ genéricos, aunque probablemente tenga más sentido para Props que para State. Luego puede usar el tipo genérico para anotar los _tipos_ de cualquier variable definida dentro del alcance de tufunción / clase.
 
 ```tsx
 interface Props<T> {
@@ -217,7 +228,7 @@ ReactDOM.render(
 );
 ```
 
-A partir de [TS 2.9](#typescript-29), también puede proporcionar el parámetro de _tipo_ en su JSX para optar por la inferencia de _tipos_:
+A partir de [TS 2.9](#typescript-29), también puede proporcionar el parámetro de _tipo_ en tuJSX para optar por la inferencia de _tipos_:
 
 ```tsx
 ReactDOM.render(
@@ -340,7 +351,7 @@ const wrapper = (
 
 [View in the TypeScript Playground](https://www.typescriptlang.org/play/?jsx=2#code/JYWwDg9gTgLgBAJQKYEMDG8BmUIjgcilQ3wFgAoC4AOxiSk3STgHUoUwx6AFHMAZwA8AFQB8cAN4U4cYHRAAuOMIDc0uEWoATegEl5SgBRyki5QEo4AXnHJ0MAHR2MAOQg615GWgAWwADZamkrOjqFuHhQAvhQUAPQAVHC8EFywAJ4EvgFBSNT4cFoQSPxw1BDwSAAewPzwENRwMOlcBGwcaSkCIqL4DnAJcRRoDXWs7Jz01nAicNV02qUSUaKGYHz8Su2TUF1CYpY2kupEMACuUI2G6jKCWsAAbqI3MpLrqfwOmjpQ+qZrGwcJhA5hiXleMgk7wEDmygU0YIhgji9ye6nMniinniCQowhazHwEjgcNy1CUdSgNAA5ipZAY4JSaXTvnoGcYGUzqNTDuIubS4FECrUyhU4Ch+PxgNTqCgAEb+ZgwCBNAkEXS0KnUKVoACCMBgVLlZzopQAZOMOjwNoJ+b0HOouvRmlk-PC8gUiiVRZUamMGqrWvgNYaaDr9aHjaa4Bbtp0bXa+hRBrFyCNtfBTfArHBDLyZqjRAAJJD+fwqrPIwvDUbwADuEzS02u4MEcamwKsACIs12NHkfn8QFYJMDrOJgSsXhIs4iZnF21BnuQMUA)
 
-Para evitar eso, agregue `children` a la definición de`WrapperProps` (posiblemente reduzca su tipo, según sea necesario):
+Para evitar eso, agregue `children` a la definición de`WrapperProps` (posiblemente reduzca tutipo, según sea necesario):
 
 ```tsx
 interface WrapperProps<T> {
@@ -662,7 +673,7 @@ export const Checkbox = (
 };
 ```
 
-Cuando su componente define múltiples accesorios, aumentan las posibilidades de esos conflictos. Sin embargo, puede indicar explícitamente que todos sus campos deben eliminarse del componente subyacente utilizando el operador `keyof`:
+Cuando tucomponente define múltiples accesorios, aumentan las posibilidades de esos conflictos. Sin embargo, puede indicar explícitamente que todos sus campos deben eliminarse del componente subyacente utilizando el operador `keyof`:
 
 ```tsx
 export interface Props {
@@ -836,7 +847,7 @@ let result = ask() // Opción<string>
 
 ## Bibliotecas de Terceros
 
-A veces, DefinitelyTyped se puede equivocar o no puede abordar su caso de uso. Puedes declarar tu propio archivo con el mismo nombre de interfaz. Typecript fusionará interfaces con el mismo nombre.
+A veces, DefinitelyTyped se puede equivocar o no puede abordar tucaso de uso. Puedes declarar tu propio archivo con el mismo nombre de interfaz. Typecript fusionará interfaces con el mismo nombre.
 
 # Sección 2: Patrones útiles por versión de TypeScript
 
@@ -950,7 +961,7 @@ En cada carpeta, cree un tsconfig.json que incluya al menos:
   "include": [
     "./**/*.ts
   ],
-  "references": [ // (opcional) matriz de subproyectos de los que depende su subproyecto
+  "references": [ // (opcional) matriz de subproyectos de los que depende tusubproyecto
     {
       "path": "../myreferencedproject", // debe tener tsconfig.json
       "prepend": true // concatenar js y mapas fuente generados por este subproyecto, si y solo si se usa outFile
@@ -981,3 +992,353 @@ Para guardar la repetitiva tsconfig, puede usar la opción `extend`:
   // otras cosas
 }
 ```
+
+## TypeScript 3.1
+
+[[Notas de la versión](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-3-1.html) | [Publicación del blog](https://blogs.msdn.microsoft.com/typescript/announcing-typescript-3-1/)]
+
+1. Declaraciones de propiedades sobre funciones
+
+Adjuntar propiedades a funciones como esta "simplemente funciona" ahora:
+
+```tsx
+export const FooComponent = ({ name }) => <div>Hola, soy {name}</div>;
+
+FooComponent.defaultProps = {
+  name: "laurosilvacom"
+};
+```
+
+## TypeScript 3.2
+
+[[Notas de la versión](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-3-2.html) | [Publicación del blog](https://blogs.msdn.microsoft.com/typescript/2018/11/29/announcing-typescript-3-2/)]
+
+Nada específicamente relacionado con React.
+
+## TypeScript 3.3
+
+[[Notas de la versión](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-3-3.html) | [Publicación del blog](https://blogs.msdn.microsoft.com/typescript/2019/01/31/announcing-typescript-3-3/)]
+
+Nada específicamente relacionado con React.
+
+## TypeScript 3.4
+
+[[Notas de la versión](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-3-4.html) | [Publicación del blog](https://devblogs.microsoft.com/typescript/announcing-typescript-3-4)]
+
+1. [`const` assertions](https://devblogs.microsoft.com/typescript/announcing-typescript-3-4/#const-assertions)
+
+```tsx
+export function useLoading() {
+  const [isLoading, setState] = React.useState(false);
+  const load = (aPromise: Promise<any>) => {
+    setState(true);
+    return aPromise.finally(() => setState(false));
+  };
+  return [isLoading, load] as const; // infiere [boolean, typeof load] instead of (boolean | typeof load)[]
+}
+```
+
+Más información sobre los lugares que puede usar [aserciones const](https://blog.logrocket.com/const-assertions-are-the-killer-new-typescript-feature-b73451f35802).
+
+## TypeScript 3.5
+
+[[Notas de la versión](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-3-5.html) | [Publicación del blog](https://devblogs.microsoft.com/typescript/announcing-typescript-3-5/)]
+
+1. ¡Tipo incorporado de `<<Omit>>` !!
+
+2. Inferencia de tipo de orden superior de constructores genéricos
+
+```tsx
+type ComponentClass<P> = new (props: P) => Component<P>;
+declare class Component<P> {
+  props: P;
+  constructor(props: P);
+}
+
+declare function myHoc<P>(C: ComponentClass<P>): ComponentClass<P>;
+
+type NestedProps<T> = { foo: number; stuff: T };
+
+declare class GenericComponent<T> extends Component<NestedProps<T>> {}
+
+// type ahora es  'new <T>(props: NestedProps<T>) => Component<NestedProps<T>>'
+const GenericComponent2 = myHoc(GenericComponent);
+```
+
+Consulte también [Notas de la actualización de Google a 3.5](https://github.com/microsoft/TypeScript/issues/33272)
+
+## TypeScript Roadmap
+
+https://github.com/Microsoft/TypeScript/wiki/Roadmap
+
+# Sección 3: Misceláneas
+
+A veces, escribir React no se trata solo de React. Si bien no nos centramos en otras bibliotecas como Redux (ver más abajo para obtener más información al respecto), aquí hay algunos consejos sobre otras preocupaciones comunes al hacer aplicaciones con React + TypeScript.
+
+## Escribir bibliotecas de TypeScript en lugar de aplicaciones
+
+`propTypes` puede parecer innecesario con TypeScript, especialmente cuando se compilan aplicaciones **React + TypeScript**, pero siguen siendo relevantes al escribir **bibliotecas** que pueden ser utilizadas por desarrolladores que trabajan en Javascript.
+
+```ts
+interface IMyComponentProps {
+  autoHeight: boolean;
+  secondProp: number;
+}
+
+export class MyComponent extends React.Component<IMyComponentProps, {}> {
+  static propTypes = {
+    autoHeight: PropTypes.bool,
+    secondProp: PropTypes.number.isRequired
+  };
+}
+```
+
+[Algo para agregar? Abre un _issue_](https://github.com/typescript-cheatsheets/react-typescript-cheatsheet/issues/new).
+
+## Componentes comentados
+
+TypeScript utiliza TSDoc, una variante de JSDoc para Typecript. Esto es muy útil para escribir bibliotecas de componentes y tener descripciones útiles emergentes en autocompletado y otras herramientas (como la tabla de documentos de Docz). Lo principal que debes recordar es usar la sintaxis `/** YOUR_COMMENT_HERE * /` en la línea justo encima de lo que esté anotando.
+
+```tsx
+import React from "react";
+
+interface MyProps {
+  /** Descripción de la "etiqueta" de props.
+   * @default foobar
+   * */
+  label?: string;
+}
+
+/**
+ * Descripción general del componente en formato JSDoc. Markdown es *compatible*.
+ */
+export default function MyComponent({ label = "foobar" }: MyProps) {
+  return <div>Hola mundo {label}</div>;
+}
+```
+
+[Ver TypeScript Playground](https://www.typescriptlang.org/play/?jsx=2#code/JYWwDg9gTgLgBAJQKYEMDG8BmUIjgcilQ3wFgAoC4AOxiSk3STgFkBPABRzAGc4BvCnDgB6AFRi4AESQ80UYGBjAI1OBExww3OACIANigBGSfboB0Q4ZIACAEySMArvqwQIRlFCtxJYkVaGJvoA-ABccDwwCtQA5gDcFAC+FBTiYkKSAOJI1PQo+nBouJB5tHAOcgpKKmo0cABSAMpSEGhwmNAgKDDmrF4A1nYQAO51fGI8TmCQsEh2YpbkvgHkSAAes-AOzq4dTtQYtaxsAMIlqrkwABT8cEGmcAC8ep0eXrpwSRHsXBC8AEoBFYiDAnFA1AAeOzAABuAD4ABKmfQQOAjaD6OwCB76JKQkQwhGJchJIA)
+
+[Algo hace falta? Abre un _issue_](https://github.com/typescript-cheatsheets/react-typescript-cheatsheet/issues/new).
+
+## Componentes Namespaced
+
+A menudo, cuando se crean componentes o componentes similares que tienen una relación _parent-child_, es útil asignar _Namespaced_ a sus componentes. Los tipos se pueden agregar fácilmente usando `Object.assign ()`;
+
+```tsx
+import React from "react";
+
+const Input = (props: any) => <input {...props} />;
+
+const Form = React.forwardRef<HTMLDivElement, any>(
+  ({ children, ...otherProps }, ref) => (
+    <form {...otherProps} ref={ref}>
+      {children}
+    </form>
+  )
+);
+
+/**
+ * Los componentes exportados ahora se pueden usar como `<Form>` y `<Form.Input>`
+ */
+export default Object.assign(Form, { Input: Input });
+```
+
+[Ver TypeScript Playground](https://www.typescriptlang.org/play/?jsx=2&ssl=1&ssc=1&pln=14&pc=52#code/JYWwDg9gTgLgBAJQKYEMDG8BmUIjgcilQ3wFgAoCtCAOwGd4BJGsAV3gF44AKMHMOgC44KGgE8AlHA4A+OAB5gLdnADeAOk18IAgL5wA9DIpVaDOADFoeLsnQx1maAHcUUACbJM8gBIAVAFkAGQARYAA3AFEAGyQQJBoYABoRcRlublU0AAtgaPciGhTNdQgYbKQoAAV+Ol0UokwpWR4KOAUnKDwNTTKK6tr9Ro5VRt1jcnb2rNz8wt02hQNOkAmJCQBuE3IDACpdtt24SIAPSFgkdzhqcFoEmDo4Gghna9E4ACMkOFY6S5FHgADeRWLoyQGpK7A0EgdTMNgwcGHAwUJBnaDwdxITAoVjReAAeQ+ACskBh1Cg6HRgABzGjcGEpVTw9jCFkwXSbIA)
+
+(Contribuido por @bryceosterhaus, ver [más discusión](https://github.com/typescript-cheatsheets/react-typescript-cheatsheet/issues/165))
+
+[Algo hace falta? Abre un _issue_](https://github.com/typescript-cheatsheets/react-typescript-cheatsheet/issues/new).
+
+## Desarrollo de Sistemas de Diseño
+
+Me gusta [Docz](https://docz.site/), que toma básicamente [1 línea de configuración](https://www.docz.site/documentation/project-configuration#typescript) para aceptar Typecript. Sin embargo, le falta mucho trabajo, se vienen muchos cambios importantes ya que todavía es <v1.0.
+
+Para desarrollar con Storybook, lea los documentos que escribí aquí: <https://storybook.js.org/configurations/typescript-config/>. Esto incluye la generación automática de documentación de _types_, lo cual es increíble :)
+
+[Algo para agregar? Presentar un problema](https://github.com/typescript-cheatsheets/react-typescript-cheatsheet/issues/new).
+
+## Migrando desde Flow
+
+Debe consultar los proyectos grandes que están migrando desde Flow para obtener referencias and tips:
+
+- [Jest](https://github.com/facebook/jest/pull/7554)
+- [Expo](https://github.com/expo/expo/issues/2164)
+- [React-beautiful-dnd](https://github.com/atlassian/react-beautiful-dnd/issues/982)
+- [Storybook](https://github.com/storybooks/storybook/issues/5030)
+- [VueJS](https://medium.com/the-vue-point/plans-for-the-next-iteration-of-vue-js-777ffea6fabf)
+
+Bibliotecas útiles:
+
+- <https://github.com/bcherny/flow-to-typescript>
+- <https://github.com/Khan/flow-to-ts>
+- <https://github.com/piotrwitek/utility-types>
+
+Si tiene consejos específicos en esta área, ¡presente un PR!
+
+[Algo hace falta? Abre un _issue_](https://github.com/typescript-cheatsheets/react-typescript-cheatsheet/issues/new).
+
+## Prettier
+
+No hay ningún secreto real para Prettier para TypeScript. ¡Pero es una gran idea correr Prettier en cada commit!
+
+```js
+yarn add -D prettier husky lint-staged
+
+// inside package.json
+{
+  //...
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "linters": {
+      "src/*.{ts,tsx,js,jsx,css,scss,md}": [
+        "prettier --trailing-comma es5 --single-quote --write",
+        "git add"
+      ],
+      "ignore": [
+        "**/dist/*, **/node_modules/*"
+      ]
+    }
+  },
+  "prettier": {
+    "printWidth": 80,
+    "semi": false,
+    "singleQuote": true,
+    "trailingComma": "es5"
+  }
+}
+```
+
+Esto está configurado para ti en [tsdx](https://github.com/palmerhq/tsdx/pull/45/files).
+
+## Linting
+
+> ⚠️ Nota que [TSLint ahora está en mantenimiento y deberías intentar usar ESLint en su lugar](https://medium.com/palantir/tslint-in-2019-1a144c2317a9). Si está interesado en los consejos de TSLint, consulte este PR desde [@azdanov](https://github.com/typescript-cheatsheets/react-typescript-cheatsheet/pull/14). El resto de esta sección solo se centra en ESLint.
+
+> ⚠️ Este es un tema en evolución. `typescript-eslint-parser` ya no se mantiene y [el trabajo ha comenzado recientemente sobre`typescript-eslint` en la comunidad ESLint](https://eslint.org/blog/2019/01/future-typescript-eslint) para lleve ESLint con TSLint.
+
+Siga los documentos de TypeScript + ESLint en https://github.com/typescript-eslint/typescript-eslint:
+
+```
+yarn add -D @typescript-eslint/eslint-plugin @typescript-eslint/parser eslint
+```
+
+agregue un script `lint` a su`package.json`:
+
+```json
+  "scripts": {
+    "lint": "eslint 'src/**/*.ts'"
+  },
+```
+
+y en `.eslintrc.json` adecuado:
+
+```json
+{
+  "env": {
+    "es6": true,
+    "node": true,
+    "jest": true
+  },
+  "extends": "eslint:recommended",
+  "parser": "@typescript-eslint/parser",
+  "plugins": ["@typescript-eslint"],
+  "parserOptions": {
+    "ecmaVersion": 2017,
+    "sourceType": "module"
+  },
+  "rules": {
+    "indent": ["error", 2],
+    "linebreak-style": ["error", "unix"],
+    "quotes": ["error", "single"],
+    "no-console": "warn",
+    "no-unused-vars": "off",
+    "@typescript-eslint/no-unused-vars": [
+      "error",
+      { "vars": "all", "args": "after-used", "ignoreRestSiblings": false }
+    ],
+    "no-empty": "warn"
+  }
+}
+```
+
+Esto está tomado de [el `tsdx` PR](https://github.com/palmerhq/tsdx/pull/70/files) que es para **bibliotecas**.
+
+Más opciones de `.eslintrc.json` se pueden desear para **aplicaciones**:
+
+```json
+{
+  "extends": [
+    "airbnb",
+    "prettier",
+    "prettier/react",
+    "plugin:prettier/recommended",
+    "plugin:jest/recommended",
+    "plugin:unicorn/recommended"
+  ],
+  "plugins": ["prettier", "jest", "unicorn"],
+  "parserOptions": {
+    "sourceType": "module",
+    "ecmaFeatures": {
+      "jsx": true
+    }
+  },
+  "env": {
+    "es6": true,
+    "browser": true,
+    "jest": true
+  },
+  "settings": {
+    "import/resolver": {
+      "node": {
+        "extensions": [".js", ".jsx", ".ts", ".tsx"]
+      }
+    }
+  },
+  "overrides": [
+    {
+      "files": ["**/*.ts", "**/*.tsx"],
+      "parser": "typescript-eslint-parser",
+      "rules": {
+        "no-undef": "off"
+      }
+    }
+  ]
+}
+```
+
+Puede leer una [guía de configuración más completa de TypeScript + ESLint aquí](https://blog.matterhorn.dev/posts/learn-typescript-linting-part-1/) de Matterhorn, en particular consulte https://github.com/MatterhornDev/learn-typescript-linting.
+
+## Trabajar con bibliotecas que no son de TypeScript (escribe tu propio index.d.ts)
+
+Digamos que deseas usar `de-indedent`, pero no está escrito o en DefinitelyTyped. Obtienes un error como este:
+
+```
+[ts]
+Could not find a declaration file for module 'de-indent'. '/Users/swyx/Work/react-sfc-loader/node_modules/de-indent/index.js' implicitly has an 'any' type.
+  Try `npm install @types/de-indent` if it exists or add a new declaration (.d.ts) file containing `declare module 'de-indent';` [7016]
+```
+
+Así que sea crea un archivo `.d.ts` en cualquier parte de tu proyecto con la definición del módulo:
+
+```ts
+// de-indent.d.ts
+declare module "de-indent" {
+  function deindent(): void;
+  export = deindent; // exportación predeterminada
+}
+```
+
+<details>
+
+<summary>Más discusión</summary>
+
+¿Algún otro consejo? ¡Por favor contribuya en este tema! [mas referencias](https://github.com/typescript-cheatsheets/react-typescript-cheatsheet/issues/8). Tenemos más discusión y ejemplos [en nuestro _issue_ aquí](https://github.com/typescript-cheatsheets/react-typescript-cheatsheet/issues/12).
+
+</details>
+
+# Sección 4: @types/react y @types/react-dom APIs
