@@ -81,6 +81,8 @@ La mejor herramienta para crear bibliotecas React + TS en este momento es [`tsdx
   - [Linting](#linting)
   - [Trabajar con bibliotecas que no son de TypeScript (escribe tu propio index.d.ts)](#trabajar-con-bibliotecas-que-no-son-de-typeScript-escribe-tu-propio-indexdts)
   - [Sección 4: @types/react y @types/react-dom APIs](#sección-4-typesreact-y-typesreact-dom-apis)
+  - [Agregando atributos no estandarizados](#agregando-atributos-no-estandarizados)
+  - [@types/react-dom](#types-react-dom)
 
 </details>
 
@@ -1342,3 +1344,91 @@ declare module "de-indent" {
 </details>
 
 # Sección 4: @types/react y @types/react-dom APIs
+
+Los tipings `@ types` exportan tanto los tipos "públicos" destinados a su uso como los tipos "privados" que son para uso interno.
+
+Consulte la [Hoja de referencia de React TypeScript de SaltyCrane](https://github.com/saltycrane/typescript-cheatsheet) para obtener una buena referencia completa autogenerada.
+
+## `@types/react`
+
+[Enlace a `.d.ts`](https://github.com/DefinitelyTyped/DefinitelyTyped/blob/master/types/react/index.d.ts)
+
+**Namespace: React**
+
+Interfaces y tipos más utilizados:
+
+- `ReactNode` - cualquier cosa que sea renderizabl*dentro* de JSX, ¡esto NO es lo mismo que lo que puede representar un componente!
+- `Component` - clase base de todos los componentes basados en clases
+- `PureComponent` - clase base para todos los componentes optimizados basados en clases
+- `FC`, `FunctionComponent` - Una interfaz completa para componentes de funciones, a menudo utilizada para escribir componentes externos en lugar de escribir los tuyos
+- `CSSProperties` - usado para escribir objetos de estilo
+- all events: se usa para escribir controladores de eventos
+- all event handlers: se usa para escribir controladores de eventos
+- all consts: `Children`, `Fragment`, ... son todos públicos y reflejan el espacio de nombres React runtime
+
+No se usa comúnmente pero es bueno saberlo
+
+- `Ref` - solía escribirse `innerRef`
+- `ElementType` - utilizado para componentes de orden superior u operaciones en componentes
+- `ComponentType` - utilizado para componentes de orden superior donde no se trata específicamente con los componentes intrínsecos
+- `ReactPortal` - se usa si necesita específicamente escribir un accesorio como portal, de lo contrario es parte de `ReactNode`
+- `ComponentClass` - Una interfaz completa para la función de constructor producida de una declaración de clase que extiende `Componente`, a menudo utilizada para escribir componentes externos en lugar de escribirla.
+- `JSXElementConstructor` - todo lo que TypeScript considere válido puede entrar en la etiqueta de apertura de una expresión JSX
+- `ComponentProps` - props de un componente
+- `ComponentPropsWithRef` - props de un componente donde una clase se base deun componentn `ref` prop con su propia instancia de type
+- `ComponentPropsWithoutRef` - accesorios de un componente sin el apoyo de `ref`
+- all methods: `createElement`, `cloneElement`, ... son todos públicos y reflejan la API de tiempo de ejecución de React
+
+[@Nota de Ferdaber](https://github.com/typescript-cheatsheets/react-typescript-cheatsheet/pull/69): Desaliento el uso de la mayoría de los tipos `... Element` debido a lo desconocido de `JSX .Element`. Casi siempre debes suponer que cualquier cosa producida por `React.createElement` es el tipo base `React.ReactElement`.
+
+**Namespace: JSX**
+
+- `Element` - El tipo de cualquier expresión JSX
+- `LibraryManagedAttributes` - Especifica otros lugares donde los elementos JSX pueden declarar e inicializar tipos de _props_. Se usa para resolver `defaultProps` y `propTypes` estáticos con el tipo de accesorios internos de un componente.
+- `IntrinsicElements` - todos los componentes integrados posibles que se pueden escribir como un type en minúscula en JSX
+
+No se usa comúnmente pero es bueno saberlo
+
+- `IntrinsicAttributes` conjunto de atributos que admiten todos los `IntrinsicElements` ... básicamente solo `key`.
+- `ElementChildrenAttribute` nombre de la propiedad que TS examina para determinar qué tipos de _children_ admite un componente. Básicamente la propiedad `children`
+- `ElementAttributesProperty` nombre de la propiedad que TS observa para descubrir qué atributos admite un componente. Básicamente la propiedad `props` (para una instancia de clase)
+
+**No usar Interno/Desaprobado**
+
+Cualquier cosa que no esté en la lista anterior se considera de tipo interno y no público. Si no está seguro, puedes consultar la fuente de `@types/react`. Los tipos se anotan en consecuencia.
+
+- `SFCElement`
+- `SFC`
+- `ComponentState`
+- `LegacyRef`
+- `StatelessComponent`
+- `ReactType`
+
+### Agregando Atributos No Estandarizados
+
+Los atributos permitidos en los componentes del host como `button` o`img` siguen el
+Estándar de vida HTML. Nuevas características que aún no forman parte de la especificación
+o solo son implementados por ciertos navegadores, por lo tanto, causarán un error de tipo. Si
+tu específicamente escribes código para estos navegadores usa [módulo de aumento](https://www.typescriptlang.org/docs/handbook/declaration-merging.html#module-augmentation) para seguir comprobando el tipo de componentes sin tener que
+usar `any` o`@ ts-ignore`.
+
+En este ejemplo, agregaremos el atributo [`loading`](https://www.chromestatus.com/feature/5645767347798016) que agrega soporte para [lazy-loading](https://web.dev/native-lazy-cargando) imágenes en Chrome:
+
+```ts
+// react-unstable-attributes.d.ts
+import "react";
+
+declare module "react" {
+  interface ImgHTMLAttributes<T> extends HTMLAttributes<T> {
+    loading?: "auto" | "eager" | "lazy";
+  }
+}
+```
+
+## @types/react-dom
+
+Para ser escrito
+
+# Mi pregunta no se responde aquí!
+
+- [Abre un issue](https://github.com/typescript-cheatsheets/react-typescript-cheatsheet/issues/new).
