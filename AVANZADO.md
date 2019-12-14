@@ -64,6 +64,12 @@ La mejor herramienta para crear bibliotecas React + TS en este momento es [`tsdx
   - [Manejo de excepciones](#manejo-de-excepciones)
   - [Bibliotecas de Terceros](#bibliotecas-de-terceros)
 - [Sección 2: Patrones útiles por versión de TypeScript](sección-2-patrones-útiles-por-versión-de-typeScript)
+  - [TypeScript 2.9](#typescript-29)
+  - [TypeScript 3.0](#typescript-30)
+  - [TypeScript 3.1](#typescript-31)
+  - [TypeScript 3.2](#typescript-32)
+  - [TypeScript 3.3](#typescript-33)
+  - [TypeScript 3.4](#typescript-34)
 
 </details>
 
@@ -833,3 +839,145 @@ let result = ask() // Opción<string>
 A veces, DefinitelyTyped se puede equivocar o no puede abordar su caso de uso. Puedes declarar tu propio archivo con el mismo nombre de interfaz. Typecript fusionará interfaces con el mismo nombre.
 
 # Sección 2: Patrones útiles por versión de TypeScript
+
+Las versiones de TypeScript a menudo introducen nuevas formas de hacer cosas; Esta sección ayuda a los usuarios actuales de React + TypeScript a actualizar las versiones de TypeScript y explorar los patrones comúnmente utilizados por las aplicaciones y bibliotecas TypeScript + React. Esto puede tener duplicaciones con otras secciones; si detecta alguna error, [abre un issue](https://github.com/typescript-cheatsheets/react-typescript-cheatsheet-es/issues/new).
+
+_Las guías de versiones de TypeScript anteriores a 2.9 no están escritas, ¡no dudes en enviar un PR!_ Además de la comunicación oficial del equipo de TS, también recomendamos [el blog de Marius Schulz para las notas de la versión](https://mariusschulz.com/).
+
+## TypeScript 2.9
+
+[[Notas de la versión](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-2-9.html) | [Publicación del blog](https://blogs.msdn.microsoft.com/typescript/2018/05/31/announcing-typescript-2-9/)]
+
+1. Escriba argumentos para _tagged template strings_ (por ejemplo, `styled-components`):
+
+```tsx
+export interface InputFormProps {
+  foo: string; // esto se entiende dentro de la cadena de plantilla a continuación
+}
+
+export const InputForm = styledInput<InputFormProps>`
+    color:
+        ${({ themeName }) => (themeName === "dark" ? "black" : "white")};
+    border-color: ${({ foo }) => (foo ? "red" : "black")};
+`;
+```
+
+2. **JSX Generics**
+
+https://github.com/Microsoft/TypeScript/pull/22415
+
+Ayuda a escribir / usar componentes genéricos:
+
+```tsx
+// en lugar de
+<Formik render={(props: FormikProps<Values>) => ....}/>
+
+// uso
+<Formik<Values> render={props => ...}/>
+<MyComponent<number> data={12} />
+```
+
+Más información: https://github.com/basarat/typescript-book/blob/master/docs/jsx/react.md#react-jsx-tip-generic-components
+
+2. Soporte para `propTypes` y`static defaultProps` en JSX usando `LibraryManagedAttributes`:
+
+```tsx
+export interface Props {
+  name: string;
+}
+
+export class Greet extends React.Component<Props> {
+  render() {
+    const { name } = this.props;
+    return <div>Hola ${name.toUpperCase()}!</div>;
+  }
+  static defaultProps = { name: "mundo" };
+}
+
+// ¡Verificaciones de tipo! ¡No se necesitan aserciones de tipo!
+let el = <Greet />;
+```
+
+3. new `Unknown` type
+
+Para escribir API para forzar verificaciones de tipo, no específicamente relacionadas con React, pero muy útiles para tratar con respuestas de API:
+
+```tsx
+interface IComment {
+  date: Date;
+  message: string;
+}
+
+interface IDataService1 {
+  getData(): any;
+}
+
+let service1: IDataService1;
+const response = service1.getData();
+response.a.b.c.d; // ERROR DE TIEMPO DE EJECUCIÓN
+
+// ----- comparar con -------
+
+interface IDataService2 {
+  getData(): unknown; // ooo
+}
+
+let service2: IDataService2;
+const response2 = service2.getData();
+// response2.a.b.c.d; // COMPILE TIME ERROR if you do this
+
+if (typeof response === "string") {
+  console.log(response.toUpperCase()); // `response` ahora tiene el tipo 'string'
+}
+```
+
+También puede afirmar un tipo, o utilizar un **protector de tipo** contra un tipo `desconocido`. Esto es mejor que recurrir a `any`.
+
+4. Referencias de proyectos
+
+Las referencias de proyecto permiten que los proyectos TypeScript dependan de otros proyectos TypeScript, específicamente, permitiendo que los archivos tsconfig.json hagan referencia a otros archivos tsconfig.json. Esto permite que las bases de código grandes escalen sin recompilar cada parte de la base de código cada vez, dividiéndola en múltiples proyectos.
+
+En cada carpeta, cree un tsconfig.json que incluya al menos:
+
+```js
+{
+  "compilerOptions": {
+    "composite": true, // le dice a TSC que es un subproyecto de un proyecto más grande
+    "declaration": true, // archivos de declaración emmet .d.ts ya que las referencias de proyecto no tienen acceso a los archivos ts de origen. Importante para que referencias de proyectos pueda trabajar!
+    "declarationMap": true, // mapas de origen para .d.ts
+    "rootDir": "." // especifique compilarlo en relación con el proyecto raíz en.
+  },
+  "include": [
+    "./**/*.ts
+  ],
+  "references": [ // (opcional) matriz de subproyectos de los que depende su subproyecto
+    {
+      "path": "../myreferencedproject", // debe tener tsconfig.json
+      "prepend": true // concatenar js y mapas fuente generados por este subproyecto, si y solo si se usa outFile
+    }
+  ]
+}
+```
+
+y la raíz `tsconfig.json` que hace referencia al subproyecto de nivel superior:
+
+```js
+{
+  "files: [],
+  "references": [
+    {"path": "./proj1"},
+    {"path": "./proj2"},
+  ]
+}
+```
+
+y debe ejecutar `tsc --build` o `tsc -b`.
+
+Para guardar la repetitiva tsconfig, puede usar la opción `extend`:
+
+```js
+{
+  "extends": "../tsconfig.base",
+  // otras cosas
+}
+```
