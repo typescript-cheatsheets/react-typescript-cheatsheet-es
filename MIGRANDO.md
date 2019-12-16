@@ -27,27 +27,26 @@
 
 # Migrando (a TypeScript) Cheatsheet
 
-This Cheatsheet collates advice and utilities from real case studies of teams moving significant codebases from plain JS or Flow over to TypeScript. It makes no attempt to _convince_ people to do so, but we do collect what few statistics companies offer up after their conversion experience.
+Este Cheatsheet recopila consejos y utilidades de casos de estudios reales de equipos que mueven bases de código significativas de JS plano o Flow a Typescript. Esto no intenta _convencer_ a la gente para que lo haga, pero recopilamos las pocas estadísticas que ofrecen las empresas después de su experiencia de migración.
 
-> ⚠️ This Cheatsheet is extremely new and could use all the help we can get. Solid advice, results, and up to date content all welcome.
+> ⚠️ Este Cheatsheet es extremadamente nuevo y podría usar toda la ayuda que podamos obtener. Consejos sólidos, resultados, y contenido actualizado son bienvenidos.
 
-## Prerequsite
+## Prerrequisitos
+Lee la [Guía oficial de TypeScript para migrar desde JS](https://www.typescriptlang.org/docs/handbook/migrating-from-javascript.html) y también deberías estar familiarizado con la [Guía de conversión de React](https://github.com/Microsoft/TypeScript-React-Conversion-Guide#typescript-react-conversion-guide).
 
-Read [TypeScript's official Guide for migrating from JS](https://www.typescriptlang.org/docs/handbook/migrating-from-javascript.html) and you should already be familiar with their [React conversion guide](https://github.com/Microsoft/TypeScript-React-Conversion-Guide#typescript-react-conversion-guide).
+## Enfoques de conversión general
 
-## General Conversion approaches
-
-- Level 0: Don't use TypeScript, use JSDoc
-  - See our [JSDoc section](#JSDoc)
-- Level 1A: Majority JavaScript, increasingly strict TypeScript
-  - as recommended by [official TS guide](https://www.typescriptlang.org/docs/handbook/migrating-from-javascript.html)
-  - use `allowJS` (Experiences: [clayallsop][clayallsop], [pleo][pleo])
-- Level 1B: Total rename to TypeScript from the start
+- Nivel 0: No uses TypeScript, usa JSDoc
+  - Mira nuestra [seccion de JSDoc](#JSDoc)
+- Nivel 1A: Majority JavaScript, increasingly strict TypeScript
+  - como recomienda la [guía oficial de TS](https://www.typescriptlang.org/docs/handbook/migrating-from-javascript.html)
+  - usa `allowJS` (Experiencias: [clayallsop][clayallsop], [pleo][pleo])
+- Nivel 1B: Renombrar todo a TypeScript desde el principio
   - "[Just rename all .js files to .ts](https://twitter.com/jamonholmgren/status/1089241726303199232)"?
-  - use the loosest, bare minimum settings to start with
-- Level 2: Strict TypeScript
-  - use Microsoft's [`dts-gen`](https://github.com/Microsoft/dts-gen) to generate `.d.ts` files for your untyped files. [This SO answer](https://stackoverflow.com/questions/12687779/how-do-you-produce-a-d-ts-typings-definition-file-from-an-existing-javascript) has more on the topic.
-  - use `declare` keyword for ambient declarations - see [declaration merging](https://github.com/typescript-cheatsheets/react-typescript-cheatsheet#troubleshooting-handbook-bugs-in-official-typings) to patch library declarations inline
+  - usa lo mas simple, la configuración mas mínima para comenzar
+- Nivel 2: TypeScript estricto
+  - usa [`dts-gen`](https://github.com/Microsoft/dts-gen) de Microsoft para generar archivos `.d.ts` para tus archivos sin tipo. [Esta respuesta de SO](https://stackoverflow.com/questions/12687779/how-do-you-produce-a-d-ts-typings-definition-file-from-an-existing-javascript) tiene mas información sobre el tema.
+  - usa la palabra clasve `declare` para declaraciones de ambiente - mira la [declaración de fusión](https://github.com/typescript-cheatsheets/react-typescript-cheatsheet#troubleshooting-handbook-bugs-in-official-typings) para parchear declaraciones de biblioteca en línea.
 
 Misc tips/approaches successful companies have taken
 
