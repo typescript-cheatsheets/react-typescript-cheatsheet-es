@@ -7,7 +7,7 @@ Gracias a todas esas maravillosas personas ([emoji key](https://allcontributors.
 <!-- markdownlint-disable -->
 <table>
   <tr>
-    <td align="center"><a href="https://laurosilva.com"><img src="https://avatars2.githubusercontent.com/u/57044804?v=4" width="100px;" alt=""/><br /><sub><b>Lauro Silva</b></sub></a><br /><a href="#maintenance-laurosilvacom" title="Maintenance">🚧</a></td>
+    <td align="center"><a href="https://laurosilva.com"><img src="https://avatars2.githubusercontent.com/u/57044804?v=4" width="100px;" alt=""/><br /><sub><b>Lauro Silva</b></sub></a><br /><a href="#maintenance-laurosilvacom" title="Maintenance">🚧</a> <a href="https://github.com/typescript-cheatsheets/react-typescript-cheatsheet-es/commits?author=laurosilvacom" title="Code">💻</a> <a href="#content-laurosilvacom" title="Content">🖋</a></td>
   </tr>
 </table>
 
