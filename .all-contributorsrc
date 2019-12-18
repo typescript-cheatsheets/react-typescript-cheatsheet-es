@@ -3,7 +3,7 @@
     "COLABORADORES.md",
     "README.md"
   ],
-  contributors: [],
+  "contributors": [],
   "imageSize": 100,
   "commit": true,
   "commitConvention": "angular",
