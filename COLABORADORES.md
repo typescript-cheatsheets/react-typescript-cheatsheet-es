@@ -13,6 +13,7 @@ Gracias a todas esas maravillosas personas ([emoji key](https://allcontributors.
 
 <!-- markdownlint-enable -->
 <!-- prettier-ignore-end -->
+
 <!-- ALL-CONTRIBUTORS-LIST:END -->
 
 Este proyecto sigue la specificación de [all-contributors](https://allcontributors.org/docs/es-es/overview). ¡Todo tipo de colaboradores son bienvenidos!
