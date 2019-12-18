@@ -3,7 +3,17 @@
     "COLABORADORES.md",
     "README.md"
   ],
-  "contributors": [],
+  "contributors": [
+    {
+      "login": "laurosilvacom",
+      "name": "Lauro Silva",
+      "avatar_url": "https://avatars2.githubusercontent.com/u/57044804?v=4",
+      "profile": "https://laurosilva.com",
+      "contributions": [
+        "maintenance"
+      ]
+    }
+  ],
   "imageSize": 100,
   "commit": true,
   "commitConvention": "angular",
@@ -11,5 +21,6 @@
   "projectName": "react-typescript-cheatsheet-es",
   "projectOwner": "typescript-cheatsheets",
   "repoType": "github",
-  "repoHost": "https://github.com"
+  "repoHost": "https://github.com",
+  "skipCi": true
 }
