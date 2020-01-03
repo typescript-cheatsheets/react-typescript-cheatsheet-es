@@ -28,7 +28,7 @@
 
 **Este HOC Cheatsheet** agrupa todo el conocimiento disponible para escribir Componentes de Orden Superior (HOC por las siglas en inglés de higher-order component) con React y Typescript.
 
-- Inicialmente haremos un mapa detallado de la [documentación oficial sobre HOC](https://reactjs.org/docs/higher-order-components.html).
+- Inicialmente haremos un mapa detallado de la [documentación oficial sobre HOC](https://es.reactjs.org/docs/higher-order-components.html).
 - Si bien existen hooks, muchas librerías y bases de código aún necesitan escribir HOC
 - Render props podrian ser considerado en el futuro
 - El objetivo es escribir HOC que ofrezcan un tipado seguro sin interferir
@@ -41,15 +41,15 @@
 
 <summary><b>Expandir Tabla de Contenido</b></summary>
 
-- [Sección 0: Ejemplo completo de un HOC](#section-0-full-hoc-example)
-- [Sección 1: Documentación de React sobre HOC en TypeScript](#section-1-react-hoc-docs-in-typescript)
-- [Sección 2: Excluyendo Props](#section-2-excluding-props)
+- [Sección 0: Ejemplo completo de un HOC](#Sección-0-Ejemplo-completo-de-un-HOC)
+- [Sección 1: Documentación de React sobre HOC en TypeScript](#Sección-1-Documentación-de-React-sobre-HOC-en-TypeScript)
+- [Sección 2: Excluyendo Props](#sección-2-Excluyendo-Props)
 
   </details>
 
 # Sección 0: Ejemplo completo de un HOC
 
-> Este es un ejemplo de un HOC para copiar y pegar. Si ciertos pedazos no tienen sentido para ti, ve a la [Sección 1](#section-1-react-hoc-docs-in-typescript) para obtener un tutorial detallado a través de una traducción completa de la documentación de React en Typescript.
+> Este es un ejemplo de un HOC para copiar y pegar. Si ciertos pedazos no tienen sentido para ti, ve a la [Sección 1](#Sección-1-Documentación-de-React-sobre-HOC-en-TypeScript) para obtener un tutorial detallado a través de una traducción completa de la documentación de React en Typescript.
 
 A veces quieres una forma sencilla de pasar props desde otro lugar (ya sea el store global o un provider) y no quieres continuamente pasar los props hacia abajo. Context es excelente para eso, pero entonces los valores desde el context solo pueden ser usado desde tu función `render`. Un HOC proveerá esos valores cómo props.
 
@@ -140,16 +140,14 @@ export function inject<TProps, TInjectedKeys extends keyof TProps>(
 ```
 
 ### Usando `forwardRef`
-Para una reutilización "verdadera", también debes considerar exponer una referencia para tus HOC. Puedes utilizar `React.forwardRef<Ref, Props>` cómo está documentado en [el cheatsheet basico](https://github.com/typescript-cheatsheets/react-typescript-cheatsheet/blob/master/README.md#forwardrefcreateref), pero estamos interesados en más ejemplos del mundo real. [Aquí hay un buen ejemplo en práctica](https://gist.github.com/OliverJAsh/d2f462b03b3e6c24f5588ca7915d010e) de @OliverJAsh.
+Para una reutilización "verdadera", también debes considerar exponer una referencia para tus HOC. Puedes utilizar `React.forwardRef<Ref, Props>` cómo está documentado en [el cheatsheet básico](https://github.com/typescript-cheatsheets/react-typescript-cheatsheet-es/blob/master/README.md#forwardrefcreateref), pero estamos interesados en más ejemplos del mundo real. [Aquí hay un buen ejemplo en práctica](https://gist.github.com/OliverJAsh/d2f462b03b3e6c24f5588ca7915d010e) de @OliverJAsh.
 
 
 # Sección 1: Documentación de React sobre HOC en TypeScript
 
-En esta primera sección nos referimos de cerca a [la documentación de React sobre HOC](https://reactjs.org/docs/higher-order-components.html) y ofrecemos un paralelo directo en TypeScript.
+En esta primera sección nos referimos de cerca a [la documentación de React sobre HOC](https://es.reactjs.org/docs/higher-order-components.html) y ofrecemos un paralelo directo en TypeScript.
 
-# 
-
-## Ejemplo de la documentación: [Usa HOCs para preocupaciones transversales](https://reactjs.org/docs/higher-order-components.html#use-hocs-for-cross-cutting-concerns)
+## Ejemplo de la documentación: [Usa HOCs para preocupaciones transversales](https://es.reactjs.org/docs/higher-order-components.html#usa-hocs-para-preocupaciones-transversales)
 
 <details>
 
@@ -199,7 +197,7 @@ type DataType = typeof DataSource;
 type Omit<T, K extends keyof T> = Pick<T, Exclude<keyof T, K>>;
 // type Optionalize<T extends K, K> = Omit<T, keyof K>;
 
-/** Componentes reescritos de la documentación de React que solo utilizan datos props inyectados */
+/** Componentes reescritos de la documentación de React que solo utilizan props inyectados */
 function CommentList({ data }: WithDataProps<typeof comments>) {
   return (
     <div>
@@ -315,17 +313,16 @@ function logProps<T>(WrappedComponent: React.ComponentType<T>) {
   };
 }
 ```
-## Ejemplo de documentación: [Pasa los props no relacionados al componente envuelto](https://es.reactjs.org/docs/higher-order-components.html#convention-pass-unrelated-props-through-to-the-wrapped-component)
+## Ejemplo de la documentación: [Pasa los props no relacionados al componente envuelto](https://es.reactjs.org/docs/higher-order-components.html#convenci%C3%B3n-pasa-los-props-no-relacionados-al-componente-envuelto)
 
 No se necesitan consejos específicos de Typescript aquí.
 
-## Ejemplo de documentación: [Maximizar la componibilidad](https://es.reactjs.org/docs/higher-order-components.html#convention-maximizing-composability)
+## Ejemplo de la documentación: [Maximizar la componibilidad](https://es.reactjs.org/docs/higher-order-components.html#convenci%C3%B3n-maximizar-la-componibilidad)
 
 los HOC pueden tomar la forma de funciones que retornan Componentes de Orden Superior que devuelven Componentes
 
 
-la función `connect` de `react-redux` tiene una serie de sobrecargas del que puedes obtener inspiración []
-`connect` from `react-redux` has a number of overloads you can take inspiration [fuente](https://github.com/DefinitelyTyped/DefinitelyTyped/blob/bc0c933415466b34d2de5790f7cd6418f676801e/types/react-redux/v5/index.d.ts#L77).
+la función `connect` de `react-redux` tiene una serie de sobrecargas del que puedes obtener inspiración [fuente](https://github.com/DefinitelyTyped/DefinitelyTyped/blob/bc0c933415466b34d2de5790f7cd6418f676801e/types/react-redux/v5/index.d.ts#L77)
 
 Construiremos nuestro propio `connect` para entender los HOC:
 
@@ -411,7 +408,7 @@ function connect(mapStateToProps: Function, mapDispatchToProps: Function) {
 [Ver en el TypeScript Playground](https://www.typescriptlang.org/play/?jsx=2#code/JYWwDg9gTgLgBAJQKYEMDG8BmUIjgcilQ3wFgAoCtCAOwGd5qQQkaY64BeOAbQF0A3BSq0GcAMK4WbADLAx3ABQBKLgD44iinDgAeACbAAbnAD0aisuHlq9RlNYwAykgA2SDNC6aA+gC44FBoATwAaOAgAdxoABRwwOgCg4NVODUUAb204YH0AqNj4ugA6XIoAX2UhG1F7ZkcAQQxgUW8VdU0s8h0UfX1JerYAxQYoANHgGgBzVI0maXZisABXOgALTLgYJAAPGHGYKHDcgPnHEvdpmDW4Soqq61sxSRoaD23+hzZvWzeMLW6cDObBc7k8R2ywJgTRgLXolkUAwWcgYD0o5FMpi2ayQdCQgSI2PxYCKWwgcAARvjJgArd5IfSU4JEuAACQA8uIKJNtlBMOh8QB1YDXJzLCl0NBQYBgWG0OIQBK6AAqGi6On0KBgKACyuq5QomGWNGatCBtD+MEUIBQYCc2u2yogCoSAQAYsbTTRwjawAAReRgLVoNZOl2JOAek1ymiqdVwIgwZZQGhwI3RuEq8IxOC7bY0fQcYWi8WS6WyuHhlVqcLiNQAnQ6QVQW1gBkDSBvIaIYgwYod2iOZXBNvV7Jx7I6GAj-Hh7wAKScAA1inIKS2oMEALJBFBTBkNGCHYAU5bbOi6cThdkgEW6GLhABEmu1j7UamqjbMWPERC1kymFlJjeKBzXAQc2GKOBlRxIEUFcNBllcLUGTgOdpzbOAcUJeQWUibD8WufEbSmYA0Cw1tWBKScEyQJMUyBZC6A4AcuxgYtQxxFhcz2VhCx7dA+1Yxx7yKNUaJ0FYKVcMjaILJAoHaeMvx0TFIzokMWRJRUOGCCBljgSIgngWl3igmDcOoJDGSpOB9EHQyRRuWxtj2HI7FQfRigkxsnngX0230e0ULnbhfWCx1nSKRRrnkYoGBQ8JYpKbSEjRFTfNqOAAoZAM6CDGAQ1C7LbTygqQzDaLkvih0kCStY4tSuh0oy79sUa0kmFxQJMF5IyoH4uhySIuDUwgIwFOlfRCNg6b+SQ+BB2owEMsTZNUwbVqdF0ZtKM+cC2J8jKMmKU7qqag0Vq2uATtOnKgtq8NLuuxtbuKe6yuDNYnqOxtzF+lqv2extyk-W59SAA)
 
 
-## Ejemplo de documentación: [Envuelve el nombre a mostrar para una depuración fácil](https://es.reactjs.org/docs/higher-order-components.html#convention-wrap-the-display-name-for-easy-debugging)
+## Ejemplo de la documentación: [Envuelve el nombre a mostrar para una depuración fácil](https://es.reactjs.org/docs/higher-order-components.html#convenci%C3%B3n-envuelve-el-nombre-a-mostrar-para-una-depuraci%C3%B3n-f%C3%A1cil)
 
 Este es bastante sencillo
 
