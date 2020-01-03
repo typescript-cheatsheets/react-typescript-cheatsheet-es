@@ -442,3 +442,90 @@ function getDisplayName<T>(WrappedComponent: React.ComponentType<T>) {
 - No utilice HOCs dentro del metodo render
 - Los metodos estaticos deben ser copiados
 - Las Refs no son pasadas
+
+
+# Seccion 2: Excluyendo Props
+
+Esto es cubierto en la seccion 1 pero aqui nos centraremos en el ya que es un problema muy comun. Los HOC a menudo inyectan props a componentes pre-fabricados. El problema que queremos resolver es que el component envuelto en HOC exponga un tipo que refleje el area de superficie reducida de los props - sin tener que volver a escribir manualmente el HOC cada vez. Esto implica algunos genericos, afortunadamente con algunas utilidades auxiliares.
+
+
+Digamos que tenemos un componente
+
+```tsx
+type DogProps {
+  name: string
+  owner: string
+}
+function Dog({name, owner}: DogProps) {
+  return <div> Woof: {name}, Owner: {owner}</div>
+}
+```
+
+Y tenemos un HOC `withOwner` que inyecta el `owner`:
+And we have a `withOwner` HOC that injects the `owner`:
+
+```tsx
+const OwnedDog = withOwner("swyx")(Dog);
+```
+
+Queremos escribir `withOwner` de tal modo que pase por los tipos de cualquier component como `Dog`, en el tipo de `OwnedDog`, menos la propiedad `owner` que inyecta:
+
+```tsx
+typeof OwnedDog; // queremos que sea igual a { name: string }
+
+<Dog name="fido" owner="swyx" />; // este debe estar bien
+<OwnedDog name="fido" owner="swyx" />; // este debe tener un typeError
+<OwnedDog name="fido" />; // este debe estar bien
+
+// y el HOC debe ser reusable por tipos de props totalmente diferentes!
+
+type CatProps = {
+  lives: number;
+  owner: string;
+};
+function Cat({ lives, owner }: CatProps) {
+  return (
+    <div>
+      {" "}
+      Meow: {lives}, Owner: {owner}
+    </div>
+  );
+}
+
+const OwnedCat = withOwner("swyx")(Cat);
+
+<Cat lives={9} owner="swyx" />; // este debe estar bien
+<OwnedCat lives={9} owner="swyx" />; // este debe tener un typeError
+<OwnedCat lives={9} />; // este debe estar bien
+```
+
+Entonces, como escribirmos `withOwner`?
+
+1. Obtenemos los tipos del componente: `keyof T`
+2. Nosotros `Exclude` las propiedades que queremos encamascarar: `Exclude<keyof T, 'owner'>`, esto te deje con una lista de nombre de propiedades que quieres en el componente envuelto ejm: `name`
+3. (Opcional) Utilice los tipo de interseccion si tiene mas para excluir: `Exclude<keyof T, 'owner' | 'otherprop' | 'moreprop'>`
+4. Los nombres de las propiedades no son exactamente iguales a las propiedades en si, los cuales tambien tienen un tipo asociado.  Asi que utilizamos esta lista generada de nombre para elegir `Pick` de los props originales:  `Pick<keyof T, Exclude<keyof T, 'owner'>>`, this leaves you with the new, filtered props, e.g. `{ name: string }`
+5. (opcional) En lugar de escribir esto manualmente cada vez, podemos utilizar esta utilidad: `type Omit<T, K extends keyof T> = Pick<T, Exclude<keyof T, K>>`
+6. Ahora escribimos el HOC como un funcion generica:
+
+```tsx
+function withOwner(owner: string) {
+  return function<T extends { owner: string }>(
+    Component: React.ComponentType<T>
+  ) {
+    return function(props: Omit<T, "owner">): React.ReactNode {
+      return <Component owner={owner} {...props} />;
+    };
+  };
+}
+```
+
+_Nota: el de arriba es un ejemplo incompleto y no funcional. PR una solucion!_
+
+## Aprende más
+
+Tendremos que extraer las lecciones de aqui en el futuro pero aqui estan: 
+
+- https://medium.com/@xfor/typescript-react-hocs-context-api-cb46da611f12
+- https://medium.com/@jrwebdev/react-higher-order-component-patterns-in-typescript-42278f7590fb
+- https://www.matthewgerstman.com/tech/ts-tricks-higher-order-components/
