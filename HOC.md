@@ -29,7 +29,7 @@
 **Este HOC Cheatsheet** agrupa todo el conocimiento disponible para escribir Componentes de Orden Superior (HOC por las siglas en inglés de higher-order component) con React y Typescript.
 
 - Inicialmente haremos un mapa detallado de la [documentación oficial sobre HOC](https://reactjs.org/docs/higher-order-components.html).
-- Si bien existen hooks, muchas librerias y bases de código aún necesitan escribir HOC
+- Si bien existen hooks, muchas librerías y bases de código aún necesitan escribir HOC
 - Render props podrian ser considerado en el futuro
 - El objetivo es escribir HOC que ofrezcan un tipado seguro sin interferir
 
@@ -51,7 +51,7 @@
 
 > Este es un ejemplo de un HOC para copiar y pegar. Si ciertos pedazos no tienen sentido para ti, ve a la [Sección 1](#section-1-react-hoc-docs-in-typescript) para obtener un tutorial detallado a través de una traducción completa de la documentación de React en Typescript.
 
-A veces quieres una forma sencilla de pasar props desde otro lugar (ya sea el store global o un provider) y no quieres continuamente pasar los props hacia abajo. Context es excelente para eso, pero entonces los valores desde el context solo pueden ser usado desde tu función `render`. Un HOC proveerá esos valores como props.
+A veces quieres una forma sencilla de pasar props desde otro lugar (ya sea el store global o un provider) y no quieres continuamente pasar los props hacia abajo. Context es excelente para eso, pero entonces los valores desde el context solo pueden ser usado desde tu función `render`. Un HOC proveerá esos valores cómo props.
 
 **Los props inyectados**
 
@@ -76,7 +76,7 @@ class MyButton extends React.Component<Props> {
   }
 
   private someInternalMethod() {
-    // Los valores del tema tambien estan aqui disponibles como props.
+    // Los valores del tema también estan aquí disponibles cómo props.
   }
 }
 
@@ -88,8 +88,8 @@ export default withTheme(MyButton);
 Ahora, al consumir el componente puedes omitir el prop `primaryColor` o anular el que fue proporcionado a través del context.
 
 ```tsx
-<MyButton>Hello button</MyButton> // Valido
-<MyButton primaryColor="#333">Hello Button</MyButton> // Tambien valido
+<MyButton>Hello button</MyButton> // Válido
+<MyButton primaryColor="#333">Hello Button</MyButton> // Tambien válido
 ```
 
 **Declarando el HoC**
@@ -104,17 +104,17 @@ export function withTheme<T extends WithThemeProps = WithThemeProps>(
   const displayName =
     WrappedComponent.displayName || WrappedComponent.name || "Component";
 
-  // Creando el component interno. El tipo de prop calculado aqui es donde ocurre la magia.
+  // Creando el componente interno. El tipo de prop calculado aquí es donde ocurre la magia.
   return class ComponentWithTheme extends React.Component<
     Optionalize<T, WithThemeProps>
   > {
     public static displayName = `withPages(${displayName})`;
 
     public render() {
-      // Obten los props que quiere inyectar. Esto podria ser hecho con context.
+      // Obten los props que quiere inyectar. Esto podría ser hecho con context.
       const themeProps = getThemePropsFromSomeWhere();
 
-      // this.props viene despues para que puedan anular los props predeterminados.
+      // this.props viene después para que puedan anular los props predeterminados.
       return <WrappedComponent {...themeProps} {...(this.props as T)} />;
     }
   };
@@ -125,10 +125,10 @@ Tenga en cuenta que la aserción `{...this.props as T}` es necesaria debido a un
 Para obtener detalles de `Optionalize` consulte la [sección de tipos de utilidad](https://github.com/typescript-cheatsheets/typescript-utilities-cheatsheet#utility-types)
 
 
-Aquí hay un ejemplo más avanzado de un Componente Dinámico de Orden Superior (HOC por las siglas en inglés de higher-order component) que basa algunos de sus parametros en los props del componente que está siendo pasado.
+Aquí hay un ejemplo más avanzado de un Componente Dinámico de Orden Superior (HOC por las siglas en inglés de higher-order component) que basa algunos de sus parámetros en los props del componente que está siendo pasado.
 
 ```tsx
-// Inyecta valores estaticos a un componente de tal manera que siempre son proporcionados.
+// Inyecta valores estáticos a un componente de tal manera que siempre son proporcionados.
 export function inject<TProps, TInjectedKeys extends keyof TProps>(
   Component: React.JSXElementConstructor<TProps>,
   injector: Pick<TProps, TInjectedKeys>
@@ -140,16 +140,16 @@ export function inject<TProps, TInjectedKeys extends keyof TProps>(
 ```
 
 ### Usando `forwardRef`
-Para una reutilización "verdadera", tambien debes considerar exponer una referencia para tus HOC. Puedes utilizar `React.forwardRef<Ref, Props>` como está documentado en [el cheatsheet basico](https://github.com/typescript-cheatsheets/react-typescript-cheatsheet/blob/master/README.md#forwardrefcreateref), pero estamos interesados en más ejemplos del mundo real. [Aquí hay un buen ejemplo en práctica](https://gist.github.com/OliverJAsh/d2f462b03b3e6c24f5588ca7915d010e) de @OliverJAsh.
+Para una reutilización "verdadera", también debes considerar exponer una referencia para tus HOC. Puedes utilizar `React.forwardRef<Ref, Props>` cómo está documentado en [el cheatsheet basico](https://github.com/typescript-cheatsheets/react-typescript-cheatsheet/blob/master/README.md#forwardrefcreateref), pero estamos interesados en más ejemplos del mundo real. [Aquí hay un buen ejemplo en práctica](https://gist.github.com/OliverJAsh/d2f462b03b3e6c24f5588ca7915d010e) de @OliverJAsh.
 
 
-# Seccion 1: Documentacion de React sobre HOC en TypeScript
+# Sección 1: Documentación de React sobre HOC en TypeScript
 
-En esta primera seccion nos referimos de cerca a [la documentacion de React sobre HOC](https://reactjs.org/docs/higher-order-components.html) y ofrecemos un paralelo directo en TypeScript.
+En esta primera sección nos referimos de cerca a [la documentación de React sobre HOC](https://reactjs.org/docs/higher-order-components.html) y ofrecemos un paralelo directo en TypeScript.
 
 # 
 
-## Ejemplo de la documentacion: [Usa HOCs para preocupaciones transversales](https://reactjs.org/docs/higher-order-components.html#use-hocs-for-cross-cutting-concerns)
+## Ejemplo de la documentación: [Usa HOCs para preocupaciones transversales](https://reactjs.org/docs/higher-order-components.html#use-hocs-for-cross-cutting-concerns)
 
 <details>
 
@@ -176,7 +176,7 @@ const comments: CommentType[] = [
 ];
 const blog = "blogpost";
 
-/** simulacion de la data */
+/** simulación de la data */
 const DataSource = {
   addChangeListener(e: Function) {
     // Hace algo
@@ -199,7 +199,7 @@ type DataType = typeof DataSource;
 type Omit<T, K extends keyof T> = Pick<T, Exclude<keyof T, K>>;
 // type Optionalize<T extends K, K> = Omit<T, keyof K>;
 
-/** Componentes reescritos de la documentacion de React que solo utilizan datos props inyectados */
+/** Componentes reescritos de la documentación de React que solo utilizan datos props inyectados */
 function CommentList({ data }: WithDataProps<typeof comments>) {
   return (
     <div>
@@ -226,21 +226,21 @@ function BlogPost({ data, id }: BlogPostProps) {
 
 </details>
 
-Ejemplo de un HOC de la documentacion de React traducido a TypeScript
+Ejemplo de un HOC de la documentación de React traducido a TypeScript
 
 ```tsx
-// Estos son los props que seran inyectados por el HOC
+// Estos son los props que serán inyectados por el HOC
 interface WithDataProps<T> {
-  data: T; // data es generico
+  data: T; // data es genérico
 }
 // T es el tipo de data
 // P son los props del componente envuelto que es inferido
-// C es la interfaz real del component envuelto (utilizado para tomar los defaultProps)
+// C es la interfaz real del componente envuelto (utilizado para tomar los defaultProps)
 export function withSubscription<T, P extends WithDataProps<T>, C>(
-  // this type allows us to infer P, but grab the type of WrappedComponent separately without it interfering with the inference of P
+  // este tipo nos permite inferir P, pero toma el tipo de componente envuelto por separado sin que interfiera con la inferencia en P
   WrappedComponent: React.JSXElementConstructor<P> & C,
-  // selectData is a functor for T
-  // props is Readonly because it's readonly inside of the class
+  // selectData es un functor para T
+  // los props son solo de lectura porque son solo lectura dentro de la clase
   selectData: (
     dataSource: typeof DataSource,
     props: Readonly<JSX.LibraryManagedAttributes<C, Omit<P, "data">>>
@@ -272,8 +272,8 @@ export function withSubscription<T, P extends WithDataProps<T>, C>(
       });
 
     render() {
-      // the typing for spreading this.props is... very complex. best way right now is to just type it as any
-      // data will still be typechecked
+      // la escritura para difundir this.props es... muy compleja. La mejor manera de hacerlo ahora mismo es escribirlo cómo `any`
+      // data todavia sera verificada
       return (
         <WrappedComponent data={this.state.data} {...(this.props as any)} />
       );
@@ -282,7 +282,7 @@ export function withSubscription<T, P extends WithDataProps<T>, C>(
   // return WithData;
 }
 
-/** HOC usage with Components */
+/** Uso de HOC con Componentes */
 export const CommentListWithSubscription = withSubscription(
   CommentList,
   (DataSource: DataType) => DataSource.getComments()
@@ -295,9 +295,9 @@ export const BlogPostWithSubscription = withSubscription(
 );
 ```
 
-## Docs Example: [Don’t Mutate the Original Component. Use Composition.](https://reactjs.org/docs/higher-order-components.html#dont-mutate-the-original-component-use-composition)
+## Ejemplo de documentación: [No mutes el componente original. Usa composición.](https://es.reactjs.org/docs/higher-order-components.html#no-mutes-el-componente-original-usa-composici%C3%B3n)
 
-This is pretty straightforward - make sure to assert the passed props as `T` [due to the TS 3.2 bug](https://github.com/Microsoft/TypeScript/issues/28938#issuecomment-450636046).
+Es bastante sencillo - asegurate de comprobar los props recibidos cómo `T` [debido al error TS 3.2](https://github.com/Microsoft/TypeScript/issues/28938#issuecomment-450636046).
 
 ```tsx
 function logProps<T>(WrappedComponent: React.ComponentType<T>) {
@@ -309,22 +309,22 @@ function logProps<T>(WrappedComponent: React.ComponentType<T>) {
       console.log("Next props: ", nextProps);
     }
     render() {
-      // Wraps the input component in a container, without mutating it. Good!
+      // Envuelve el componente de entrada en un contenedor sin mutarlo. Muy bien!
       return <WrappedComponent {...(this.props as T)} />;
     }
   };
 }
 ```
-## Ejemplo de documentacion: [Pasa los props no relacionados al componente envuelto][Pass Unrelated Props Through to the Wrapped Component](https://es.reactjs.org/docs/higher-order-components.html#convention-pass-unrelated-props-through-to-the-wrapped-component)
+## Ejemplo de documentación: [Pasa los props no relacionados al componente envuelto](https://es.reactjs.org/docs/higher-order-components.html#convention-pass-unrelated-props-through-to-the-wrapped-component)
 
-No se necesitan consejos especificos de Typescript aqui.
+No se necesitan consejos específicos de Typescript aquí.
 
-## Ejemplo de documentacion: [Maximizar la componibilidad](https://es.reactjs.org/docs/higher-order-components.html#convention-maximizing-composability)
+## Ejemplo de documentación: [Maximizar la componibilidad](https://es.reactjs.org/docs/higher-order-components.html#convention-maximizing-composability)
 
-los HOC pueden tomar la forma de functiones que retornan Componentes de Orden Superior que devuelven Componentes
+los HOC pueden tomar la forma de funciones que retornan Componentes de Orden Superior que devuelven Componentes
 
 
-la funcion `connect` de `react-redux` tiene una serie de sobrecargas del que puedes obtener inspiracion []
+la función `connect` de `react-redux` tiene una serie de sobrecargas del que puedes obtener inspiración []
 `connect` from `react-redux` has a number of overloads you can take inspiration [fuente](https://github.com/DefinitelyTyped/DefinitelyTyped/blob/bc0c933415466b34d2de5790f7cd6418f676801e/types/react-redux/v5/index.d.ts#L77).
 
 Construiremos nuestro propio `connect` para entender los HOC:
@@ -353,7 +353,7 @@ const comments: CommentType[] = [
 ];
 /** componentes ficticios que reciben cualquier cosa */
 const Comment = (_: any) => null;
-/** Componentes reescritos de la documentacion de React que solo utilizan props de datos inyectados **/
+/** Componentes reescritos de la documentación de React que solo utilizan props de datos inyectados **/
 function CommentList({ data }: WithSubscriptionProps<typeof comments>) {
   return (
     <div>
@@ -391,10 +391,10 @@ function connect(mapStateToProps: Function, mapDispatchToProps: Function) {
     // Creando el componente interno. El tipo de propiedades calculadas, es donde ocurre la magia 
     return class ComponentWithTheme extends React.Component<Props> {
       public render() {
-        // Obten los props que desea inyectar. Esto podria hacerse con context
+        // Obten los props que desea inyectar. Esto podría hacerse con context
         const mappedStateProps = mapStateToProps(this.state, this.props);
         const mappedDispatchProps = mapDispatchToProps(this.state, this.props);
-        // this props viene despues de tal modo que anula los predeterminados
+        // this props viene después de tal modo que anula los predeterminados
         return (
           <WrappedComponent
             {...this.props}
@@ -411,7 +411,7 @@ function connect(mapStateToProps: Function, mapDispatchToProps: Function) {
 [Ver en el TypeScript Playground](https://www.typescriptlang.org/play/?jsx=2#code/JYWwDg9gTgLgBAJQKYEMDG8BmUIjgcilQ3wFgAoCtCAOwGd5qQQkaY64BeOAbQF0A3BSq0GcAMK4WbADLAx3ABQBKLgD44iinDgAeACbAAbnAD0aisuHlq9RlNYwAykgA2SDNC6aA+gC44FBoATwAaOAgAdxoABRwwOgCg4NVODUUAb204YH0AqNj4ugA6XIoAX2UhG1F7ZkcAQQxgUW8VdU0s8h0UfX1JerYAxQYoANHgGgBzVI0maXZisABXOgALTLgYJAAPGHGYKHDcgPnHEvdpmDW4Soqq61sxSRoaD23+hzZvWzeMLW6cDObBc7k8R2ywJgTRgLXolkUAwWcgYD0o5FMpi2ayQdCQgSI2PxYCKWwgcAARvjJgArd5IfSU4JEuAACQA8uIKJNtlBMOh8QB1YDXJzLCl0NBQYBgWG0OIQBK6AAqGi6On0KBgKACyuq5QomGWNGatCBtD+MEUIBQYCc2u2yogCoSAQAYsbTTRwjawAAReRgLVoNZOl2JOAek1ymiqdVwIgwZZQGhwI3RuEq8IxOC7bY0fQcYWi8WS6WyuHhlVqcLiNQAnQ6QVQW1gBkDSBvIaIYgwYod2iOZXBNvV7Jx7I6GAj-Hh7wAKScAA1inIKS2oMEALJBFBTBkNGCHYAU5bbOi6cThdkgEW6GLhABEmu1j7UamqjbMWPERC1kymFlJjeKBzXAQc2GKOBlRxIEUFcNBllcLUGTgOdpzbOAcUJeQWUibD8WufEbSmYA0Cw1tWBKScEyQJMUyBZC6A4AcuxgYtQxxFhcz2VhCx7dA+1Yxx7yKNUaJ0FYKVcMjaILJAoHaeMvx0TFIzokMWRJRUOGCCBljgSIgngWl3igmDcOoJDGSpOB9EHQyRRuWxtj2HI7FQfRigkxsnngX0230e0ULnbhfWCx1nSKRRrnkYoGBQ8JYpKbSEjRFTfNqOAAoZAM6CDGAQ1C7LbTygqQzDaLkvih0kCStY4tSuh0oy79sUa0kmFxQJMF5IyoH4uhySIuDUwgIwFOlfRCNg6b+SQ+BB2owEMsTZNUwbVqdF0ZtKM+cC2J8jKMmKU7qqag0Vq2uATtOnKgtq8NLuuxtbuKe6yuDNYnqOxtzF+lqv2extyk-W59SAA)
 
 
-## Ejemplo de documentacion: [Envuelve el nombre a mostrar para una depuración fácil](https://es.reactjs.org/docs/higher-order-components.html#convention-wrap-the-display-name-for-easy-debugging)
+## Ejemplo de documentación: [Envuelve el nombre a mostrar para una depuración fácil](https://es.reactjs.org/docs/higher-order-components.html#convention-wrap-the-display-name-for-easy-debugging)
 
 Este es bastante sencillo
 
@@ -437,16 +437,16 @@ function getDisplayName<T>(WrappedComponent: React.ComponentType<T>) {
 }
 ```
 
-## No escrito: [seccion de consideraciones](https://es.reactjs.org/docs/higher-order-components.html#consideraciones)
+## No escrito: [sección de consideraciones](https://es.reactjs.org/docs/higher-order-components.html#consideraciones)
 
-- No utilice HOCs dentro del metodo render
-- Los metodos estaticos deben ser copiados
+- No utilice HOCs dentro del método render
+- Los métodos estáticos deben ser copiados
 - Las Refs no son pasadas
 
 
-# Seccion 2: Excluyendo Props
+# sección 2: Excluyendo Props
 
-Esto es cubierto en la seccion 1 pero aqui nos centraremos en el ya que es un problema muy comun. Los HOC a menudo inyectan props a componentes pre-fabricados. El problema que queremos resolver es que el component envuelto en HOC exponga un tipo que refleje el area de superficie reducida de los props - sin tener que volver a escribir manualmente el HOC cada vez. Esto implica algunos genericos, afortunadamente con algunas utilidades auxiliares.
+Esto es cubierto en la sección 1 pero aquí nos centraremos en el ya que es un problema muy común. Los HOC a menudo inyectan props a componentes pre-fabricados. El problema que queremos resolver es que el componente envuelto en HOC exponga un tipo que refleje el área de superficie reducida de los props - sin tener que volver a escribir manualmente el HOC cada vez. Esto implica algunos genericos, afortunadamente con algunas utilidades auxiliares.
 
 
 Digamos que tenemos un componente
@@ -468,7 +468,7 @@ And we have a `withOwner` HOC that injects the `owner`:
 const OwnedDog = withOwner("swyx")(Dog);
 ```
 
-Queremos escribir `withOwner` de tal modo que pase por los tipos de cualquier component como `Dog`, en el tipo de `OwnedDog`, menos la propiedad `owner` que inyecta:
+Queremos escribir `withOwner` de tal modo que pase por los tipos de cualquier componente cómo `Dog`, en el tipo de `OwnedDog`, menos la propiedad `owner` que inyecta:
 
 ```tsx
 typeof OwnedDog; // queremos que sea igual a { name: string }
@@ -499,14 +499,14 @@ const OwnedCat = withOwner("swyx")(Cat);
 <OwnedCat lives={9} />; // este debe estar bien
 ```
 
-Entonces, como escribirmos `withOwner`?
+Entonces, cómo escribimos `withOwner`?
 
 1. Obtenemos los tipos del componente: `keyof T`
 2. Nosotros `Exclude` las propiedades que queremos encamascarar: `Exclude<keyof T, 'owner'>`, esto te deje con una lista de nombre de propiedades que quieres en el componente envuelto ejm: `name`
-3. (Opcional) Utilice los tipo de interseccion si tiene mas para excluir: `Exclude<keyof T, 'owner' | 'otherprop' | 'moreprop'>`
-4. Los nombres de las propiedades no son exactamente iguales a las propiedades en si, los cuales tambien tienen un tipo asociado.  Asi que utilizamos esta lista generada de nombre para elegir `Pick` de los props originales:  `Pick<keyof T, Exclude<keyof T, 'owner'>>`, this leaves you with the new, filtered props, e.g. `{ name: string }`
+3. (Opcional) Utilice los tipo de intersección sí tiene mas para excluir: `Exclude<keyof T, 'owner' | 'otherprop' | 'moreprop'>`
+4. Los nombres de las propiedades no son exactamente iguales a las propiedades en sí, los cuales también tienen un tipo asociado. Así que utilizamos esta lista generada de nombre para elegir `Pick` de los props originales:  `Pick<keyof T, Exclude<keyof T, 'owner'>>`, this leaves you with the new, filtered props, e.g. `{ name: string }`
 5. (opcional) En lugar de escribir esto manualmente cada vez, podemos utilizar esta utilidad: `type Omit<T, K extends keyof T> = Pick<T, Exclude<keyof T, K>>`
-6. Ahora escribimos el HOC como un funcion generica:
+6. Ahora escribimos el HOC cómo un función genérica:
 
 ```tsx
 function withOwner(owner: string) {
@@ -520,11 +520,11 @@ function withOwner(owner: string) {
 }
 ```
 
-_Nota: el de arriba es un ejemplo incompleto y no funcional. PR una solucion!_
+_Nota: el de arriba es un ejemplo incompleto y no funcional. PR una solución!_
 
 ## Aprende más
 
-Tendremos que extraer las lecciones de aqui en el futuro pero aqui estan: 
+Tendremos que extraer las lecciones de aquí en el futuro pero aquí estan: 
 
 - https://medium.com/@xfor/typescript-react-hocs-context-api-cb46da611f12
 - https://medium.com/@jrwebdev/react-higher-order-component-patterns-in-typescript-42278f7590fb
