@@ -35,6 +35,17 @@
         "code",
         "doc"
       ]
+    },
+    {
+      "login": "hlebon",
+      "name": "Hans Garcia",
+      "avatar_url": "https://avatars1.githubusercontent.com/u/18727829?v=4",
+      "profile": "https://hansgarcia.dev/",
+      "contributions": [
+        "translation",
+        "code",
+        "doc"
+      ]
     }
   ],
   "imageSize": 100,
