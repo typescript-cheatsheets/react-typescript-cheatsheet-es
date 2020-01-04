@@ -12,13 +12,14 @@
 
 <p>Cheatsheets para desarrolladores experimentados de React que estan empezando con TypeScript</p>
 
-[**Básico**](https://github.com/typescript-cheatsheets/react-typescript-cheatsheet#basic-cheatsheet-table-of-contents) |
+[**Básico**](https://github.com/typescript-cheatsheets/react-typescript-cheatsheet-es#tabla-de-contenidos-de-la-cheatsheet-básica) |
 [**Avanzado**](https://github.com/typescript-cheatsheets/react-typescript-cheatsheet-es/blob/master/AVANZADO.md) |
 [**Migrando**](https://github.com/typescript-cheatsheets/react-typescript-cheatsheet/blob/master/MIGRATING.md) |
-[**HOC**](https://github.com/typescript-cheatsheets/react-typescript-cheatsheet/blob/master/HOC.md) |
-[中文翻译](https://github.com/fi3ework/blog/tree/master/react-typescript-cheatsheet-cn) |
-[¡Contribuir!](https://github.com/typescript-cheatsheets/react-typescript-cheatsheet-es/blob/master/CONTRIBUYENDO.md) |
-[¡Preguntas!](https://github.com/typescript-cheatsheets/react-typescript-cheatsheet-es/issues/new)
+[**HOC**](https://github.com/typescript-cheatsheets/react-typescript-cheatsheet-es/blob/master/HOC.md) |
+[**Inglés**](https://github.com/typescript-cheatsheets/react-typescript-cheatsheet) |
+[**中文翻译**](https://github.com/fi3ework/blog/tree/master/react-typescript-cheatsheet-cn) |
+[Contribuir](https://github.com/typescript-cheatsheets/react-typescript-cheatsheet-es/blob/master/CONTRIBUYENDO.md) |
+[Preguntas](https://github.com/typescript-cheatsheets/react-typescript-cheatsheet-es/issues/new)
 
 </div>
 
@@ -372,10 +373,7 @@ const commentActions = () => ({
   addComment: (str: string) => comments.push({ text: str, id: comments.length })
 });
 
-const ConnectedComment = connect(
-  commentSelector,
-  commentActions
-)(CommentList);
+const ConnectedComment = connect(commentSelector, commentActions)(CommentList);
 // prop que son inyectadas por el HOC.
 interface WithSubscriptionProps<T> {
   data: T;
