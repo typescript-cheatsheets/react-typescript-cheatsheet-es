@@ -120,10 +120,10 @@ export function withTheme<T extends WithThemeProps = WithThemeProps>(
   };
 }
 ```
+
 Tenga en cuenta que la aserción `{...this.props as T}` es necesaria debido a un error en TS 3.2 https://github.com/Microsoft/TypeScript/issues/28938#issuecomment-450636046
 
 Para obtener detalles de `Optionalize` consulte la [sección de tipos de utilidad](https://github.com/typescript-cheatsheets/typescript-utilities-cheatsheet#utility-types)
-
 
 Aquí hay un ejemplo más avanzado de un Componente Dinámico de Orden Superior (HOC por las siglas en inglés de higher-order component) que basa algunos de sus parámetros en los _props_ del componente que está siendo pasado.
 
@@ -140,8 +140,8 @@ export function inject<TProps, TInjectedKeys extends keyof TProps>(
 ```
 
 ### Usando `forwardRef`
-Para una reutilización "verdadera", también debes considerar exponer una referencia para tus HOC. Puedes utilizar `React.forwardRef<Ref, Props>` cómo está documentado en [el cheatsheet básico](https://github.com/typescript-cheatsheets/react-typescript-cheatsheet-es/blob/master/README.md#forwardrefcreateref), pero estamos interesados en más ejemplos del mundo real. [Aquí hay un buen ejemplo en práctica](https://gist.github.com/OliverJAsh/d2f462b03b3e6c24f5588ca7915d010e) de @OliverJAsh.
 
+Para una reutilización "verdadera", también debes considerar exponer una referencia para tus HOC. Puedes utilizar `React.forwardRef<Ref, Props>` cómo está documentado en [el cheatsheet básico](https://github.com/typescript-cheatsheets/react-typescript-cheatsheet-es/blob/master/README.md#forwardrefcreateref), pero estamos interesados en más ejemplos del mundo real. [Aquí hay un buen ejemplo en práctica](https://gist.github.com/OliverJAsh/d2f462b03b3e6c24f5588ca7915d010e) de @OliverJAsh.
 
 # Sección 1: Documentación de React sobre HOC en TypeScript
 
@@ -313,6 +313,7 @@ function logProps<T>(WrappedComponent: React.ComponentType<T>) {
   };
 }
 ```
+
 ## Ejemplo de la documentación: [Pasa los _props_ no relacionados al componente envuelto](https://es.reactjs.org/docs/higher-order-components.html#convenci%C3%B3n-pasa-los-props-no-relacionados-al-componente-envuelto)
 
 No se necesitan consejos específicos de Typescript aquí.
@@ -320,7 +321,6 @@ No se necesitan consejos específicos de Typescript aquí.
 ## Ejemplo de la documentación: [Maximizar la componibilidad](https://es.reactjs.org/docs/higher-order-components.html#convenci%C3%B3n-maximizar-la-componibilidad)
 
 los HOC pueden tomar la forma de funciones que retornan Componentes de Orden Superior que devuelven Componentes
-
 
 la función `connect` de `react-redux` tiene una serie de sobrecargas del que puedes obtener inspiración [fuente](https://github.com/DefinitelyTyped/DefinitelyTyped/blob/bc0c933415466b34d2de5790f7cd6418f676801e/types/react-redux/v5/index.d.ts#L77)
 
@@ -385,7 +385,7 @@ function connect(mapStateToProps: Function, mapDispatchToProps: Function) {
     WrappedComponent: React.ComponentType<T>
   ) {
     type Props = JSX.LibraryManagedAttributes<C, Omit<P, "data">>;
-    // Creando el componente interno. El tipo de propiedades calculadas, es donde ocurre la magia 
+    // Creando el componente interno. El tipo de propiedades calculadas, es donde ocurre la magia
     return class ComponentWithTheme extends React.Component<Props> {
       public render() {
         // Obten los props que desea inyectar. Esto podría hacerse con context
@@ -406,7 +406,6 @@ function connect(mapStateToProps: Function, mapDispatchToProps: Function) {
 ```
 
 [Ver en el TypeScript Playground](https://www.typescriptlang.org/play/?jsx=2#code/JYWwDg9gTgLgBAJQKYEMDG8BmUIjgcilQ3wFgAoCtCAOwGd5qQQkaY64BeOAbQF0A3BSq0GcAMK4WbADLAx3ABQBKLgD44iinDgAeACbAAbnAD0aisuHlq9RlNYwAykgA2SDNC6aA+gC44FBoATwAaOAgAdxoABRwwOgCg4NVODUUAb204YH0AqNj4ugA6XIoAX2UhG1F7ZkcAQQxgUW8VdU0s8h0UfX1JerYAxQYoANHgGgBzVI0maXZisABXOgALTLgYJAAPGHGYKHDcgPnHEvdpmDW4Soqq61sxSRoaD23+hzZvWzeMLW6cDObBc7k8R2ywJgTRgLXolkUAwWcgYD0o5FMpi2ayQdCQgSI2PxYCKWwgcAARvjJgArd5IfSU4JEuAACQA8uIKJNtlBMOh8QB1YDXJzLCl0NBQYBgWG0OIQBK6AAqGi6On0KBgKACyuq5QomGWNGatCBtD+MEUIBQYCc2u2yogCoSAQAYsbTTRwjawAAReRgLVoNZOl2JOAek1ymiqdVwIgwZZQGhwI3RuEq8IxOC7bY0fQcYWi8WS6WyuHhlVqcLiNQAnQ6QVQW1gBkDSBvIaIYgwYod2iOZXBNvV7Jx7I6GAj-Hh7wAKScAA1inIKS2oMEALJBFBTBkNGCHYAU5bbOi6cThdkgEW6GLhABEmu1j7UamqjbMWPERC1kymFlJjeKBzXAQc2GKOBlRxIEUFcNBllcLUGTgOdpzbOAcUJeQWUibD8WufEbSmYA0Cw1tWBKScEyQJMUyBZC6A4AcuxgYtQxxFhcz2VhCx7dA+1Yxx7yKNUaJ0FYKVcMjaILJAoHaeMvx0TFIzokMWRJRUOGCCBljgSIgngWl3igmDcOoJDGSpOB9EHQyRRuWxtj2HI7FQfRigkxsnngX0230e0ULnbhfWCx1nSKRRrnkYoGBQ8JYpKbSEjRFTfNqOAAoZAM6CDGAQ1C7LbTygqQzDaLkvih0kCStY4tSuh0oy79sUa0kmFxQJMF5IyoH4uhySIuDUwgIwFOlfRCNg6b+SQ+BB2owEMsTZNUwbVqdF0ZtKM+cC2J8jKMmKU7qqag0Vq2uATtOnKgtq8NLuuxtbuKe6yuDNYnqOxtzF+lqv2extyk-W59SAA)
-
 
 ## Ejemplo de la documentación: [Envuelve el nombre a mostrar para una depuración fácil](https://es.reactjs.org/docs/higher-order-components.html#convenci%C3%B3n-envuelve-el-nombre-a-mostrar-para-una-depuraci%C3%B3n-f%C3%A1cil)
 
@@ -440,11 +439,9 @@ function getDisplayName<T>(WrappedComponent: React.ComponentType<T>) {
 - Los métodos estáticos deben ser copiados
 - Las Refs no son pasadas
 
-
 # sección 2: Excluyendo Props
 
 Esto es cubierto en la sección 1 pero aquí nos centraremos en el ya que es un problema muy común. Los HOC a menudo inyectan _props_ a componentes pre-fabricados. El problema que queremos resolver es que el componente envuelto en HOC exponga un tipo que refleje el área de superficie reducida de los _props_ - sin tener que volver a escribir manualmente el HOC cada vez. Esto implica algunos genericos, afortunadamente con algunas utilidades auxiliares.
-
 
 Digamos que tenemos un componente
 
@@ -501,7 +498,7 @@ Entonces, cómo escribimos `withOwner`?
 1. Obtenemos los tipos del componente: `keyof T`
 2. Nosotros `Exclude` las propiedades que queremos encamascarar: `Exclude<keyof T, 'owner'>`, esto te deje con una lista de nombre de propiedades que quieres en el componente envuelto ejm: `name`
 3. (Opcional) Utilice los tipo de intersección sí tiene mas para excluir: `Exclude<keyof T, 'owner' | 'otherprop' | 'moreprop'>`
-4. Los nombres de las propiedades no son exactamente iguales a las propiedades en sí, los cuales también tienen un tipo asociado. Así que utilizamos esta lista generada de nombre para elegir `Pick` de los _props_ originales:  `Pick<keyof T, Exclude<keyof T, 'owner'>>`, this leaves you with the new, filtered _props_, e.g. `{ name: string }`
+4. Los nombres de las propiedades no son exactamente iguales a las propiedades en sí, los cuales también tienen un tipo asociado. Así que utilizamos esta lista generada de nombre para elegir `Pick` de los _props_ originales: `Pick<keyof T, Exclude<keyof T, 'owner'>>`, this leaves you with the new, filtered _props_, e.g. `{ name: string }`
 5. (opcional) En lugar de escribir esto manualmente cada vez, podemos utilizar esta utilidad: `type Omit<T, K extends keyof T> = Pick<T, Exclude<keyof T, K>>`
 6. Ahora escribimos el HOC cómo un función genérica:
 
@@ -521,7 +518,7 @@ _Nota: el de arriba es un ejemplo incompleto y no funcional. PR una solución!_
 
 ## Aprende más
 
-Tendremos que extraer las lecciones de aquí en el futuro pero aquí estan: 
+Tendremos que extraer las lecciones de aquí en el futuro pero aquí estan:
 
 - https://medium.com/@xfor/typescript-react-hocs-context-api-cb46da611f12
 - https://medium.com/@jrwebdev/react-higher-order-component-patterns-in-typescript-42278f7590fb
