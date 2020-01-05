@@ -32,6 +32,7 @@ Este Cheatsheet recopila consejos y utilidades de casos de estudios reales de eq
 > ⚠️ Este Cheatsheet es extremadamente nuevo y podría usar toda la ayuda que podamos obtener. Consejos sólidos, resultados, y contenido actualizado son bienvenidos.
 
 ## Prerrequisitos
+
 Leer la [Guía oficial de TypeScript para migrar desde JS](https://www.typescriptlang.org/docs/handbook/migrating-from-javascript.html) y también deberías estar familiarizado con la [Guía de conversión de React](https://github.com/Microsoft/TypeScript-React-Conversion-Guide#typescript-react-conversion-guide).
 
 ## Enfoques de conversión general
@@ -118,7 +119,7 @@ Problemas a tener en cuenta:
 - [TypeWiz](https://github.com/urish/typewiz)
 - [js-to-ts-converter](https://github.com/gregjacobs/js-to-ts-converter)
 
-### Conversión manual de JS a TS 
+### Conversión manual de JS a TS
 
 la estrategia de "Solo renombra"
 
@@ -162,7 +163,6 @@ Una vez que haya terminado, trague la píldora roja apagando los `any` implícit
 ```
 
 Esto generará un montón de errores de tipo y puedes comenzar a convertir archivos a TS u (opcionalmente) usar [anotaciones JSDoc](https://www.typescriptlang.org/docs/handbook/type-checking-javascript-files.html) en tu JS.
-
 
 Una práctica común es usar alias de tipo TODO para `any`, para que puedas hacer un seguimiento de lo que necesita hacer luego.
 
@@ -222,7 +222,6 @@ Contenido antiguo que posiblemente esté desactualizado
 > Nuestro hallazgo central es que ambos sistemas de tipos estáticos encuentran un porcentaje importante de errores públicos: tanto Flow 0.30 como TypeScript 2.0 detectan con éxito el 15%.
 
 ## Diversas historias de migración de compañías notables y fuentes abiertas
-
 
 - [Adopting TypeScript at Scale - AirBnB's conversion story and strategy](https://www.youtube.com/watch?v=P-J9Eg7hJwE)
 - [Lyft](https://eng.lyft.com/typescript-at-lyft-64f0702346ea)
