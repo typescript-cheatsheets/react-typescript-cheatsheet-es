@@ -14,7 +14,7 @@
 
 [**Básico**](https://github.com/typescript-cheatsheets/react-typescript-cheatsheet-es#tabla-de-contenidos-de-la-cheatsheet-básica) |
 [**Avanzado**](https://github.com/typescript-cheatsheets/react-typescript-cheatsheet-es/blob/master/AVANZADO.md) |
-[**Migrando**](https://github.com/typescript-cheatsheets/react-typescript-cheatsheet/blob/master/MIGRATING.md) |
+[**Migrando**](https://github.com/typescript-cheatsheets/react-typescript-cheatsheet-es/blob/master/MIGRANDO.md) |
 [**HOC**](https://github.com/typescript-cheatsheets/react-typescript-cheatsheet-es/blob/master/HOC.md) |
 [**Inglés**](https://github.com/typescript-cheatsheets/react-typescript-cheatsheet) |
 [**中文翻译**](https://github.com/fi3ework/blog/tree/master/react-typescript-cheatsheet-cn) |

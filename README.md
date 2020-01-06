@@ -16,7 +16,7 @@
 
 [**Básico**](https://github.com/typescript-cheatsheets/react-typescript-cheatsheet-es#tabla-de-contenidos-de-la-cheatsheet-básica) |
 [**Avanzado**](https://github.com/typescript-cheatsheets/react-typescript-cheatsheet-es/blob/master/AVANZADO.md) |
-[**Migrando**](https://github.com/typescript-cheatsheets/react-typescript-cheatsheet/blob/master/MIGRATING.md) |
+[**Migrando**](https://github.com/typescript-cheatsheets/react-typescript-cheatsheet-es/blob/master/MIGRANDO.md) |
 [**HOC**](https://github.com/typescript-cheatsheets/react-typescript-cheatsheet-es/blob/master/HOC.md) |
 [**Inglés**](https://github.com/typescript-cheatsheets/react-typescript-cheatsheet) |
 [**中文翻译**](https://github.com/fi3ework/blog/tree/master/react-typescript-cheatsheet-cn) |
@@ -25,7 +25,7 @@
 
 ---
 
-:wave: Este repositorio es mantenido por [@laurosilvacom](https://twitter.com/laurosilvacom), [@aromanarguello](https://twitter.com/aromanarguello), [@carburo_rmf](https://twitter.com/carburo_rmf), [@dantehemerson](https://twitter.com/dantehemerson), y [@HansLGarcia](https://twitter.com/HansLGarcia) . ¡Estamos tan contentos de que quieras probar TypeScript con React! Si ves que algo esta mal, ¡abre un [_Issue_](https://github.com/typescript-cheatsheets/react-typescript-cheatsheet-es/issues/new)! :+1:
+:wave: Este repositorio es mantenido por [@laurosilvacom](https://twitter.com/laurosilvacom), [@aromanarguello](https://twitter.com/aromanarguello), [@rainerxmf ](https://twitter.com/rainerxmf), [@dantehemerson](https://twitter.com/dantehemerson), y [@hanslgarcia](https://twitter.com/HansLGarcia) . ¡Estamos tan contentos de que quieras probar TypeScript con React! Si ves que algo esta mal, ¡abre un [_Issue_](https://github.com/typescript-cheatsheets/react-typescript-cheatsheet-es/issues/new)! :+1:
 
 ---
 
