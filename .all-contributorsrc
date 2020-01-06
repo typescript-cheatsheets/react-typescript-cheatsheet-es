@@ -46,6 +46,17 @@
         "code",
         "doc"
       ]
+    },
+    {
+      "login": "dantehemerson",
+      "name": "Dante Calderón",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/18385321?v=4",
+      "profile": "https://dantecalderon.dev",
+      "contributions": [
+        "translation",
+        "code",
+        "doc"
+      ]
     }
   ],
   "imageSize": 100,
