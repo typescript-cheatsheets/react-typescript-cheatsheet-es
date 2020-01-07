@@ -112,8 +112,9 @@
 ## Prerrequisitos
 
 1. Buena comprensión de [React](https://reactjs.org)
-2. Estar familiarizado con con los [tipos de TypeScript](https://www.typescriptlang.org/docs/handbook/basic-types.html) ([La guía de 2ality](http://2ality.com/2018/04/type-notation-typescript.html) es de ayuda)
+2. Estar familiarizado con con los [tipos de TypeScript básicos](https://www.typescriptlang.org/docs/handbook/basic-types.html) ([La guía de 2ality](http://2ality.com/2018/04/type-notation-typescript.html) es de ayuda)
 3. Haber leído la [sección sobre TypeScript en la documentación oficial de React](https://es.reactjs.org/docs/static-type-checking.html#typescript).
+4. Haber leído [la sección de React del nuevo Typescript playground](http://www.typescriptlang.org/play/index.html?jsx=2&esModuleInterop=true&e=181#example/typescript-with-react) (opcional: además haga los 40+ ejemplos debajo de la sección de ejemplos [del playground](http://www.typescriptlang.org/play/index.html))
 
 Esta guía siempre asumirá que estás iniciando con la última versión de Typescript. Las notas para versiones anteriores se encontrarán en etiquetas expandibles `<details>`.
 
@@ -1679,6 +1680,7 @@ Lo creas o no, apenas hemos introducido TypeScript en esta cheatsheet. Hay un mu
 
 Vale la pena menicionar algunos recursos para inciarse:
 
+- La sección de los 40+ ejemplos [del playground](http://www.typescriptlang.org/play/index.html), escrito por @Orta
 - El resumen de TS de Anders Hejlsberg's: https://www.youtube.com/watch?v=ET4kT88JRXs
 - Marius Schultz: https://blog.mariusschulz.com/series/typescript-evolution con un [curso de Egghead.io](https://egghead.io/courses/advanced-static-types-in-typescript)
 - La explicación profunda de Basarat: https://basarat.gitbooks.io/typescript/
