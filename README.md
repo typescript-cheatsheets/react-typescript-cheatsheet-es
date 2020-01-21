@@ -98,6 +98,7 @@
 - [Manual de resolución de problemas: Errores en tipos oficiales](#manual-de-resolución-de-problemas-errores-en-tipos-oficiales)
 - [Bases de código de React + TypeScript recomendadas para aprender](#bases-de-código-de-react--typescript-recomendadas-para-aprender)
 - [Herramientas e integración en editores](#herramientas-e-integración-en-editores)
+- [Linting](#linting)
 - [Otros recursos sobre React + TypeScript](#otros-recursos-sobre-react--typescript)
 - [Charlas recomendadas sobre React + TypeScript](#charlas-recomendadas-sobre-react--typescript)
 - [Hora de realmente aprender TypeScript](#hora-de-realmente-aprender-typescript)
@@ -1653,6 +1654,106 @@ _Boilerplates_ de React Native: _contribución de [@spoeck](https://github.com/t
   - peitalin/vim-jsx-typescript
   - NeoVim: https://github.com/neoclide/coc.nvim
   - otros discusiones: https://mobile.twitter.com/ryanflorence/status/1085715595994095620
+
+## Linting
+
+> ⚠️ Nota que [TSLint ahora está en mantenimiento y deberías intentar usar ESLint en su lugar](https://medium.com/palantir/tslint-in-2019-1a144c2317a9). Si está interesado en los consejos de TSLint, consulte este PR desde [@azdanov](https://github.com/typescript-cheatsheets/react-typescript-cheatsheet/pull/14). El resto de esta sección solo se centra en ESLint.
+
+> ⚠️ Este es un tema en evolución. `typescript-eslint-parser` ya no se mantiene y [el trabajo ha comenzado recientemente sobre`typescript-eslint` en la comunidad ESLint](https://eslint.org/blog/2019/01/future-typescript-eslint) para lleve ESLint con TSLint.
+
+Siga los documentos de TypeScript + ESLint en https://github.com/typescript-eslint/typescript-eslint:
+
+```
+yarn add -D @typescript-eslint/eslint-plugin @typescript-eslint/parser eslint
+```
+
+agregue un script `lint` a su`package.json`:
+
+```json
+  "scripts": {
+    "lint": "eslint 'src/**/*.ts'"
+  },
+```
+
+y en `.eslintrc.json` adecuado:
+
+```json
+{
+  "env": {
+    "es6": true,
+    "node": true,
+    "jest": true
+  },
+  "extends": "eslint:recommended",
+  "parser": "@typescript-eslint/parser",
+  "plugins": ["@typescript-eslint"],
+  "parserOptions": {
+    "ecmaVersion": 2017,
+    "sourceType": "module"
+  },
+  "rules": {
+    "indent": ["error", 2],
+    "linebreak-style": ["error", "unix"],
+    "quotes": ["error", "single"],
+    "no-console": "warn",
+    "no-unused-vars": "off",
+    "@typescript-eslint/no-unused-vars": [
+      "error",
+      { "vars": "all", "args": "after-used", "ignoreRestSiblings": false }
+    ],
+    "no-empty": "warn"
+  }
+}
+```
+
+Esto está tomado de [el `tsdx` PR](https://github.com/palmerhq/tsdx/pull/70/files) que es para **bibliotecas**.
+
+Más opciones de `.eslintrc.json` se pueden desear para **aplicaciones**:
+
+```json
+{
+  "extends": [
+    "airbnb",
+    "prettier",
+    "prettier/react",
+    "plugin:prettier/recommended",
+    "plugin:jest/recommended",
+    "plugin:unicorn/recommended"
+  ],
+  "plugins": ["prettier", "jest", "unicorn"],
+  "parserOptions": {
+    "sourceType": "module",
+    "ecmaFeatures": {
+      "jsx": true
+    }
+  },
+  "env": {
+    "es6": true,
+    "browser": true,
+    "jest": true
+  },
+  "settings": {
+    "import/resolver": {
+      "node": {
+        "extensions": [".js", ".jsx", ".ts", ".tsx"]
+      }
+    }
+  },
+  "overrides": [
+    {
+      "files": ["**/*.ts", "**/*.tsx"],
+      "parser": "typescript-eslint-parser",
+      "rules": {
+        "no-undef": "off"
+      }
+    }
+  ]
+}
+```
+
+Puede leer una [guía de configuración más completa de TypeScript + ESLint aquí](https://blog.matterhorn.dev/posts/learn-typescript-linting-part-1/) de Matterhorn, en particular consulte https://github.com/MatterhornDev/learn-typescript-linting.
+
+Si está buscando información sobre Prettier, consulte [Prettier](https://github.com/typescript-cheatsheets/react-typescript-cheatsheet/blob/master/ADVANCED.md#prettier).
 
 # Otros recursos sobre React + TypeScript
 
