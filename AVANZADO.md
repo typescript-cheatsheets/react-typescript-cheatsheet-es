@@ -87,7 +87,7 @@ La mejor herramienta para crear bibliotecas React + TS en este momento es [`tsdx
   - [Sección 4: @types/react y @types/react-dom APIs](#sección-4-typesreact-y-typesreact-dom-apis)
   - [Agregando atributos no estandarizados](#agregando-atributos-no-estandarizados)
   - [@types/react-dom](#types-react-dom)
-</details>
+    </details>
 
 # Sección 0: Tipos de utilidad
 
@@ -759,7 +759,8 @@ class DateIsInFutureError extends RangeError {}
 function parse(date: string) {
   if (!isValid(date))
     throw new InvalidDateFormatError("no es un formato de fecha válido");
-  if (isInFuture(date)) throw new DateIsInFutureError("la fecha es en el futuro");
+  if (isInFuture(date))
+    throw new DateIsInFutureError("la fecha es en el futuro");
   // ...
 }
 
@@ -786,7 +787,8 @@ function parse(
 ): Date | InvalidDateFormatError | DateIsInFutureError {
   if (!isValid(date))
     return new InvalidDateFormatError("no es un formato de fecha válido");
-  if (isInFuture(date)) return new DateIsInFutureError("la fecha es en el futuro");
+  if (isInFuture(date))
+    return new DateIsInFutureError("la fecha es en el futuro");
   // ...
 }
 
@@ -1169,7 +1171,7 @@ function assertIsString(val: any): asserts val is string {
 function yell(str: any) {
   assertIsString(str);
 
-  // Ahora Typescript sabe que 'str' es de tipo 'string' 
+  // Ahora Typescript sabe que 'str' es de tipo 'string'
   return str.toUppercase();
   //         ~~~~~~~~~~~
   // error: La propiedad 'toUppercase' no existe el tipo 'string'.
