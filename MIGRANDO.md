@@ -228,6 +228,7 @@ Contenido antiguo que posiblemente esté desactualizado
 - [Google](http://neugierig.org/software/blog/2018/09/typescript-at-google.html)
 - [Tiny][tiny] - [Talk from ForwardJS here](https://www.slideshare.net/tiny/porting-100k-lines-of-code-to-typescript)
 - [Slack](https://slack.engineering/typescript-at-slack-a81307fa288d) ([podcast](https://softwareengineeringdaily.com/2017/08/11/typescript-at-slack-with-felix-rieseberg/))
+- [Historia de adopción de Netflix](https://www.youtube.com/watch?v=p5Hwb1YbNMY&feature=share)
 - [Priceline](https://medium.com/priceline-labs/trying-out-typescript-part-1-15a5267215b9)
 - Dropbox - [Talk at React Loop](https://www.youtube.com/watch?v=veXkJq0Z2Qk)
 
@@ -241,6 +242,7 @@ Código abierto
 - [React Native CLI](https://github.com/react-native-community/cli/issues/683)
 - [Next.js](https://nextjs.org/blog/next-9)
 - [Redux](https://github.com/reduxjs/redux/pull/3536)
+- [Dojo 1 -> 2 migration](https://devchat.tv/js-jabber/jsj-277-dojo-2-dylan-schiemann-kitson-kelly/)
 
 ## Enlaces
 
