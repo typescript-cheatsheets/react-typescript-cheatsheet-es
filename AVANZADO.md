@@ -71,20 +71,22 @@ La mejor herramienta para crear bibliotecas React + TS en este momento es [`tsdx
   - [TypeScript 3.2](#typescript-32)
   - [TypeScript 3.3](#typescript-33)
   - [TypeScript 3.4](#typescript-34)
+  - [TypeScript 3.5](#typescript-35)
+  - [TypeScript 3.6](#typescript-36)
+  - [TypeScript 3.7](#typescript-37)
 - [Sección 3: Misceláneas](#sección-3-Misceláneas)
-
   - [Escribir bibliotecas de TypeScript en lugar de aplicaciones](#escribir-bibliotecas-de-typeScript-en-lugar-de-aplicaciones)
   - [Componentes Comentados](#componentes-comentados)
   - [Componentes Namespaced](#componentes-namespaced)
   - [Desarrollo de Sistemas de Diseño](#desarrollo-de-sistemas-de-diseño)
   - [Migrando desde Flow](#migrando-desde-flow)
   - [Prettier](#prettier)
+  - [Testing](#testing)
   - [Linting](#linting)
   - [Trabajar con bibliotecas que no son de TypeScript (escribe tu propio index.d.ts)](#trabajar-con-bibliotecas-que-no-son-de-typeScript-escribe-tu-propio-indexdts)
   - [Sección 4: @types/react y @types/react-dom APIs](#sección-4-typesreact-y-typesreact-dom-apis)
   - [Agregando atributos no estandarizados](#agregando-atributos-no-estandarizados)
   - [@types/react-dom](#types-react-dom)
-
 </details>
 
 # Sección 0: Tipos de utilidad
@@ -699,7 +701,8 @@ Como puede ver en el ejemplo anterior de Omitir, también puede escribir una ló
 
 _(Contribuido por [@ferdaber](https://github.com/typescript-cheatsheets/react-typescript-cheatsheet/issues/63))_
 
-Hay muchos lugares donde desea reutilizar algunas piesas de props debido a _props drilling_, para que pueda exportar el tipo de accesorios como parte del módulo o extraerlos (de cualquier manera funciona).
+Hay muchos lugares donde desea reutilizar algunas piesas de props debido a _props drilling_,
+para que pueda exportar el tipo de accesorios como parte del módulo o extraerlos (de cualquier manera funciona).
 
 La ventaja de extraer los tipos de props es que no necesitas exportar todo. Y el componente fuente se propagará a todos los componentes consumidores.
 
@@ -756,8 +759,7 @@ class DateIsInFutureError extends RangeError {}
 function parse(date: string) {
   if (!isValid(date))
     throw new InvalidDateFormatError("no es un formato de fecha válido");
-  if (isInFuture(date))
-    throw new DateIsInFutureError("la fecha es en el futuro");
+  if (isInFuture(date)) throw new DateIsInFutureError("la fecha es en el futuro");
   // ...
 }
 
@@ -784,8 +786,7 @@ function parse(
 ): Date | InvalidDateFormatError | DateIsInFutureError {
   if (!isValid(date))
     return new InvalidDateFormatError("no es un formato de fecha válido");
-  if (isInFuture(date))
-    return new DateIsInFutureError("la fecha es en el futuro");
+  if (isInFuture(date)) return new DateIsInFutureError("la fecha es en el futuro");
   // ...
 }
 
@@ -892,6 +893,22 @@ Ayuda a escribir / usar componentes genéricos:
 ```
 
 Más información: https://github.com/basarat/typescript-book/blob/master/docs/jsx/react.md#react-jsx-tip-generic-components
+
+## TypeScript 3.0
+
+[[Notas de la versión](https://github.com/Microsoft/TypeScript/releases/tag/v3.0.1) | [Publicación del blog](https://blogs.msdn.microsoft.com/typescript/2018/07/30/announcing-typescript-3-0/)]
+
+1. Parametros rest con tipo para escribir argumentos de longitud variable:
+
+```ts
+// `rest` acepta cualquier numero de strings - incluso ninguno!
+function foo(...rest: string[]) {
+  // ...
+}
+
+foo("hello"); // funciona
+foo("hello", "world"); // también funciona
+```
 
 2. Soporte para `propTypes` y`static defaultProps` en JSX usando `LibraryManagedAttributes`:
 
@@ -1070,9 +1087,105 @@ const GenericComponent2 = myHoc(GenericComponent);
 
 Consulte también [Notas de la actualización de Google a 3.5](https://github.com/microsoft/TypeScript/issues/33272)
 
-## TypeScript Roadmap
+## TypeScript 3.6
+
+[[Notas de la versión](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-3-6.html) | [Publicación del blog](https://devblogs.microsoft.com/typescript/announcing-typescript-3-6/)]
+
+Nada es particularmente específico de React, pero [el playground](https://github.com/agentcooper/typescript-play) recibió una actualización y [Las clases Ambientales y Funciones pueden fusionarse](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-3-6.html#ambient-classes-and-functions-can-merge)
+
+## TypeScript 3.7
+
+[[Notas de la versión](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-3-7.html) | [Publicación del blog](https://devblogs.microsoft.com/typescript/announcing-typescript-3-7/)]
+
+1. Optional Chaining
+
+```ts
+let x = foo?.bar.baz();
+
+// es equivalente a
+
+let x = foo === null || foo === undefined ? undefined : foo.bar.baz();
+
+// Optional Element access
+function tryGetFirstElement<T>(arr?: T[]) {
+  return arr?.[0];
+}
+
+// Llamada opcional
+async function makeRequest(url: string, log?: (msg: string) => void) {
+  log?.(`Request started at ${new Date().toISOString()}`);
+  const result = (await fetch(url)).json();
+  log?.(`Request finished at at ${new Date().toISOString()}`);
+  return result;
+}
+```
+
+2. Fusión nula
+
+```ts
+let x = foo ?? bar();
+
+// es equivalente a
+
+let x = foo !== null && foo !== undefined ? foo : bar();
+```
+
+**POR LO GENERAL DEBES USAR `??` SIEMPRE QUE USAS NORMALMENTE `||`** a menos que realmente te refieras a falsedad:
+
+```tsx
+function ShowNumber({ value }: { value: number }) {
+  let _value = value || 0.5; // reemplazará 0 con 0.5 incluso si el usuario se refiere a 0
+  // etc...
+}
+```
+
+3. Funciones de Aserción
+
+```tsx
+function assert(condition: any, msg?: string): asserts condition {
+  if (!condition) {
+    throw new AssertionError(msg);
+  }
+}
+function yell(str) {
+  assert(typeof str === "string");
+
+  return str.toUppercase();
+  //         ~~~~~~~~~~~
+  // error: La propiedad 'toUppercase' no existe en el tipo 'string'.
+  //        Querías decir 'toUpperCase'?
+}
+```
+
+También puede hacer assert sin una función personalizada
+You can also assert without a custom function:
+
+```tsx
+function assertIsString(val: any): asserts val is string {
+  if (typeof val !== "string") {
+    throw new AssertionError("Not a string!");
+  }
+}
+function yell(str: any) {
+  assertIsString(str);
+
+  // Ahora Typescript sabe que 'str' es de tipo 'string' 
+  return str.toUppercase();
+  //         ~~~~~~~~~~~
+  // error: La propiedad 'toUppercase' no existe el tipo 'string'.
+  //        Querías decir 'toUpperCase'?
+}
+```
+
+4. `ts-nocheck`
+
+Ahora puedes añadir `// @ts-nocheck` a la parte superior de los archivos Typescript! bueno para las migraciones.
+
+## TypeScript Roadmap y Especificaciones
 
 https://github.com/Microsoft/TypeScript/wiki/Roadmap
+
+¿Sabía también que puede leer la especificación de TypeScript en línea? https://github.com/microsoft/TypeScript/blob/master/doc/spec.md
 
 # Sección 3: Misceláneas
 
@@ -1216,105 +1329,18 @@ yarn add -D prettier husky lint-staged
 }
 ```
 
+Integrar esto con ESlint puede ser un problema. Todavía no hemos escrito mucho sobre esto, por favor contribuya si tiene una opinión firme. [Aquí hay un gist útil.](https://gist.github.com/JirkaVebr/519c7597517e4ba756d5b89e7cb4cc0e)
+
 Esto está configurado para ti en [tsdx](https://github.com/palmerhq/tsdx/pull/45/files).
 
-## Linting
+## Testing
 
-> ⚠️ Nota que [TSLint ahora está en mantenimiento y deberías intentar usar ESLint en su lugar](https://medium.com/palantir/tslint-in-2019-1a144c2317a9). Si está interesado en los consejos de TSLint, consulte este PR desde [@azdanov](https://github.com/typescript-cheatsheets/react-typescript-cheatsheet/pull/14). El resto de esta sección solo se centra en ESLint.
+¡Sí, puedes probar tus tipos! No debe usarlo para TODO, pero puede ayudar a prevenir regresiones:
 
-> ⚠️ Este es un tema en evolución. `typescript-eslint-parser` ya no se mantiene y [el trabajo ha comenzado recientemente sobre`typescript-eslint` en la comunidad ESLint](https://eslint.org/blog/2019/01/future-typescript-eslint) para lleve ESLint con TSLint.
-
-Siga los documentos de TypeScript + ESLint en https://github.com/typescript-eslint/typescript-eslint:
-
-```
-yarn add -D @typescript-eslint/eslint-plugin @typescript-eslint/parser eslint
-```
-
-agregue un script `lint` a su`package.json`:
-
-```json
-  "scripts": {
-    "lint": "eslint 'src/**/*.ts'"
-  },
-```
-
-y en `.eslintrc.json` adecuado:
-
-```json
-{
-  "env": {
-    "es6": true,
-    "node": true,
-    "jest": true
-  },
-  "extends": "eslint:recommended",
-  "parser": "@typescript-eslint/parser",
-  "plugins": ["@typescript-eslint"],
-  "parserOptions": {
-    "ecmaVersion": 2017,
-    "sourceType": "module"
-  },
-  "rules": {
-    "indent": ["error", 2],
-    "linebreak-style": ["error", "unix"],
-    "quotes": ["error", "single"],
-    "no-console": "warn",
-    "no-unused-vars": "off",
-    "@typescript-eslint/no-unused-vars": [
-      "error",
-      { "vars": "all", "args": "after-used", "ignoreRestSiblings": false }
-    ],
-    "no-empty": "warn"
-  }
-}
-```
-
-Esto está tomado de [el `tsdx` PR](https://github.com/palmerhq/tsdx/pull/70/files) que es para **bibliotecas**.
-
-Más opciones de `.eslintrc.json` se pueden desear para **aplicaciones**:
-
-```json
-{
-  "extends": [
-    "airbnb",
-    "prettier",
-    "prettier/react",
-    "plugin:prettier/recommended",
-    "plugin:jest/recommended",
-    "plugin:unicorn/recommended"
-  ],
-  "plugins": ["prettier", "jest", "unicorn"],
-  "parserOptions": {
-    "sourceType": "module",
-    "ecmaFeatures": {
-      "jsx": true
-    }
-  },
-  "env": {
-    "es6": true,
-    "browser": true,
-    "jest": true
-  },
-  "settings": {
-    "import/resolver": {
-      "node": {
-        "extensions": [".js", ".jsx", ".ts", ".tsx"]
-      }
-    }
-  },
-  "overrides": [
-    {
-      "files": ["**/*.ts", "**/*.tsx"],
-      "parser": "typescript-eslint-parser",
-      "rules": {
-        "no-undef": "off"
-      }
-    }
-  ]
-}
-```
-
-Puede leer una [guía de configuración más completa de TypeScript + ESLint aquí](https://blog.matterhorn.dev/posts/learn-typescript-linting-part-1/) de Matterhorn, en particular consulte https://github.com/MatterhornDev/learn-typescript-linting.
+- https://github.com/azz/jest-runner-tsc
+- https://github.com/SamVerschueren/tsd
+- https://github.com/ikatyang/dts-jest ([Demo](https://codesandbox.io/s/dts-test-frozen-public-demo-iyorn))
+- https://github.com/microsoft/dtslint ([Intro to dtslint](https://www.youtube.com/watch?v=nygcFEwOG8w&feature=share)
 
 ## Trabajar con bibliotecas que no son de TypeScript (escribe tu propio index.d.ts)
 
