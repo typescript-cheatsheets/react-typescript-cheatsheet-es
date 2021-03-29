@@ -1777,7 +1777,7 @@ Si está buscando información sobre Prettier, consulte [Prettier](https://githu
 
 # Hora de realmente aprender TypeScript
 
-Lo creas o no, apenas hemos introducido TypeScript en esta cheatsheet. Hay un mundo compleoo de loǵica de tipos genéricos al que eventualmente te enfrentarás, sin embargo se trata menos de lidiar con React que simplemente mejorar en TypeScript, y por eso está fuera de este ámbito. Pero al menos ahora ya puedes ser productivo en React :)
+Lo creas o no, apenas hemos introducido TypeScript en esta cheatsheet. Hay un mundo complejo de loǵica de tipos genéricos al que eventualmente te enfrentarás, sin embargo se trata menos de lidiar con React que simplemente mejorar en TypeScript, y por eso está fuera de este ámbito. Pero al menos ahora ya puedes ser productivo en React :)
 
 Vale la pena menicionar algunos recursos para inciarse:
 
