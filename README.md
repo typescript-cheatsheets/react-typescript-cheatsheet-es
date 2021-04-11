@@ -181,7 +181,7 @@ Algunas diferencias con la versión "normal de función":
 
 - Proporciona chequeo de tipos y autocompletamiento para propiedades estáticas como `displayName`, `propTypes`, y `defaultProps` - **Sin embargo**, actualmente existen problemas conocidos cuando se usa `defaultProps` con `React.FunctionComponent`. Consulta [este _issue_ para los detalles](https://github.com/typescript-cheatsheets/react-typescript-cheatsheet/issues/87) (navega hacia nuestra sección sobre `defaultProps` para las recomendaciones sobre la declaración de tipos).
 
-- Proporciona un definición implícita de `children` (ver debajo); sin embargo existen algunos problemas con el tipo implícito `children` (p.ej. [DefinitelyTyped#33006](https://github.com/DefinitelyTyped/DefinitelyTyped/issues/33006)), y podría considerarse de todas formas ser explícito en los componentes que consumen `children`.
+- Proporciona una definición implícita de `children` (ver debajo); sin embargo existen algunos problemas con el tipo implícito `children` (p.ej. [DefinitelyTyped#33006](https://github.com/DefinitelyTyped/DefinitelyTyped/issues/33006)), y podría considerarse de todas formas ser explícito en los componentes que consumen `children`.
 
 ```tsx
 const Title: React.FunctionComponent<{ title: string }> = ({
